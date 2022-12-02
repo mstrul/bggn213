@@ -4,6 +4,8 @@ Classwork
 This is all my classwork for BGGN213, a class at UC San Diego
 Instructor: Barry Grant
 
+[Personal Github Website Link] (https://mstrul.github.io/bggn213/)
+
 
 The way `Push` and `Pull` works on R studio is it uses unix commands called git -pull and git -push 
 
