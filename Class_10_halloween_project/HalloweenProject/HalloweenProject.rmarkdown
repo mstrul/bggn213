@@ -7,7 +7,9 @@ date: 10-28-2022
 toc: TRUE
 ---
 
+
 # Importing Candy data
+
 
 ```{r}
 candy_url <- url("https://raw.githubusercontent.com/fivethirtyeight/data/master/candy-power-ranking/candy-data.csv")
@@ -16,17 +18,21 @@ candy <- read.csv(candy_url, header = TRUE, row.names=1)
 head(candy)
 ```
 
+
 # Q1: how many different candies are in this dataset?
 
 85
 
 # Q2: how many fruity candy types are in this data set?
 
+
 ```{r}
 sum(candy[,2])
 ```
 
+
 # What is my favorite candy?
+
 
 ```{r}
 candy["Root Beer Barrels", ]$winpercent
@@ -37,12 +43,15 @@ candy["Tootsie Roll Snack Bars", ]$winpercent
 
 ```
 
+
 using library `skimr`
+
 
 ```{r}
 library("skimr")
 skim(candy)
 ```
+
 
 # Q6: Is there any variable/column that looks to be on a different scale to the majority of the other columns in the data set?
 
@@ -54,10 +63,12 @@ The zero vs one represents the identity of a candy being or containing chocolate
 
 # Q8: Plot a histogram of winpercent values
 
+
 ```{r}
 hist(candy[,"winpercent"])
 
 ```
+
 
 # Q9: is the distribution of winpercent values symetrical?
 
@@ -69,6 +80,7 @@ Below 50%
 
 # Q11: On average is chocolate candy higher or lower ranked than fruit candy?
 
+
 ```{r}
 chocolate.inds <- as.logical(candy$chocolate)
 chocolate.win <- candy[chocolate.inds,]$winpercent
@@ -78,15 +90,19 @@ fruity.win <- candy[fruity.inds,]$winpercent
 mean(fruity.win)
 ```
 
+
 # Q12: is the difference stastically significant?
+
 
 ```{r}
 t.test(chocolate.win,fruity.win)
 ```
 
+
 This data is significantly different, that chocolate, on average is ranked higher than fruity
 
 # Q13: What are the five least likely candy types in this set?
+
 
 ```{r}
 ordered_by_winpercent <- candy[order(candy[,"winpercent"]),]
@@ -97,7 +113,9 @@ candy %>% arrange(winpercent) %>% head(5)
 #by_winpercent %>% arrange(desc(winpercent))
 ```
 
+
 # Q14: What are the top 5 all time favorite candy types out of this set?
+
 
 ```{r}
 ordered_by_winpercent <- candy[order(candy[,"winpercent"],decreasing = TRUE),]
@@ -106,7 +124,9 @@ library("dplyr")
 candy %>% arrange(winpercent) %>% head(5)
 ```
 
+
 # Q15/16: Make a barplot of candy rankings based on winpercent values
+
 
 ```{r}
 library("ggplot2")
@@ -125,7 +145,9 @@ ggplot(candy)+
 
 ```
 
+
 # Q17: Coloring the bar plot via type
+
 
 ```{r}
 my_cols=rep("black",nrow(candy))
@@ -141,6 +163,7 @@ ggplot(candy)+aes(winpercent, reorder(rownames(candy),winpercent))+
 ggsave("mybarplot_withcol.png")
 ```
 
+
 Worst ranking chocolate is sixlets
 
 # Q18: What is the best ranked fruity candy
@@ -148,6 +171,7 @@ Worst ranking chocolate is sixlets
 Star bursts
 
 # Looking at pricepercent
+
 
 ```{r}
 library(ggrepel)
@@ -158,18 +182,22 @@ ggplot(candy)+
   geom_text_repel(col=my_cols, size=3.3, max.overlaps=5)
 ```
 
+
 # Q19: Which candy is the highest rank and the lowest price
 
 Reese's miniatures
 
 # Q20: What are the top 5 most expensive candy types
 
+
 ```{r}
 ordered_by_pricepercent <- candy[order(candy[,"pricepercent"],decreasing = TRUE),]
 head(ordered_by_pricepercent, n=5)
 ```
 
+
 # Q21: Make a barplot again with `geom_col()` this time using `pricepercent`
+
 
 ```{r}
 ggplot(candy) +
@@ -179,13 +207,16 @@ ggplot(candy) +
     geom_point()
 ```
 
+
 # Exploring correlation structure
+
 
 ```{r}
 library(corrplot)
 cij <- cor(candy)
 corrplot(cij)
 ```
+
 
 # Q22: Examing this plot what two variables are anti-correlated?
 
@@ -200,6 +231,7 @@ Chocolate with winpercent, and chocolate with Bar
 # Principal component analysis
 
 Note: we need `scale=TRUE` to be entered because we want to scale the winpercent which is abnormally scaled wtih the rest of the data.
+
 
 ```{r}
 candy_pca <- prcomp(candy,scale=TRUE)
@@ -233,24 +265,30 @@ plot_1
 #ggplotly(plot_1)
 ```
 
+
 # Q24: What original variables are picked up strongly by PC1 in the positive direction?
+
 
 ```{r}
 barplot(candy_pca$rotation[,1], las=2,ylab="PCA1 contribution")
 ```
 
+
 This means that fruity, hard, and muptiple pieces of candy coming in a bag or a box are all tightly correlated with each other. Similary chocolate, caramel, peanuts & almods, nougat, crispy, bar, high sugar, high price, and high win percent are all correlated with eachother.
 
 What about PC2?
+
 
 ```{r}
 barplot(candy_pca$rotation[,2], las=2,ylab="PCA1 contribution")
 
 ```
 
+
 PC2 shows us that caramel/nougat and hard are the opposite of nutty and multiple things in a single bag.
 
 To find out what the intrinsic dimensionality of a data set is you can plot the `candy_pca` summary of variance to determine the inflection point
+
 
 ```{r}
 
@@ -259,4 +297,6 @@ plot(x$importance[2,],type="b")
 
 ```
 
+
 This shows us that two dimensions is perfectly sufficient for data separation.
+
