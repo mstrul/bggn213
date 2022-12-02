@@ -30,3 +30,4 @@ This is under the [README.md](https://github.com/mstrul/bggn213/blob/main/README
 - Class 19:
 - Class 20: 
 
+First local files were created then edited. Then they were commited. Then pushed. 
