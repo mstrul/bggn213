@@ -1,0 +1,201 @@
+---
+title: "Class_5"
+
+author: "Max Strul"
+format: pdf
+editor: visual
+toc: TRUE
+---
+
+## Running Code
+
+When you click the **Render** (note: Render in bold because of two "\*\*") button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
+
+```{r}
+1 + 1
+```
+
+You can add options to executable code like this
+
+```{r}
+#| echo: false
+#install.packages("ggplot2")
+2 * 2
+x <- 1:10
+y <- 1:10
+plot(x,y)
+```
+
+The `echo: false` option disables the printing of code (only output is displayed).
+
+# **Our First Plot**
+
+**Note: you can make a new code chunk by pressing cmd + option + i**
+
+This graph is plotted with `plot()`
+
+```{r}
+#| echo: false
+#cars
+plot(cars)
+
+```
+
+Can I plot this with `ggplot2`? First use `install.packages()` function for "ggplot" Then use `library()` with `"ggplot2"`inside of it
+
+```{r}
+library("ggplot2")
+ggplot(cars)
+
+```
+
+Note: `ggplot(cars)` did not achieve what we wanted. It was a blank canvas. This is because every ggplot needs 3 layers:
+
+\-**Data** (i.e. the data.fame we have),
+
+\-**Aes** (the aesthetic mapping of our data to what we want to plot),
+
+\-**Geoms**(How we want to plot this stuff)
+
+```{r}
+ggplot(data=cars)+
+  aes(x=speed,y=dist) +
+  geom_point()
+```
+
+Now we can add lines!
+
+```{r}
+ggplot(data=cars)+
+  aes(x=speed,y=dist) +
+  geom_point()+
+  geom_line(colour="red")+
+  geom_smooth(method = lm , se = FALSE, colour = "green")
+    #formula= y~x, colour="blue")
+    #method = lm means linear 
+#you can also do formula = y~poly(x,2) for exponential
+```
+
+# Gene Expression!
+
+```{r}
+library(RColorBrewer)
+#library(RColorBrewer)
+#display.brewer.all()
+url <- "https://bioboot.github.io/bimm143_S20/class-material/up_down_expression.txt"
+genes <- read.delim(url)
+head(genes)
+
+table(genes$State)
+127/(72+4997+127)
+g <- ggplot(data=genes)+
+  aes(x=Condition1,y=Condition2,col=State,names=Gene)+
+  geom_point() +
+  scale_color_manual(values=brewer.pal(3, "BrBG"))+
+  ggtitle("Gene Expresion Changes Upon Drug Treatment")+
+  xlab("Control (no drug)")+
+  ylab("Drug Treatment")
+
+#library(plotly)
+
+#ggplotly(g, hoverinfo = "Gene")
+```
+
+There are `r nrow(genes)` genes in this data set.
+
+The column names are: `r colnames(genes)`
+
+There are `r ncol(genes)` columns
+
+The complete information for this data frame is: `r table(genes$State)`
+
+The total up-regulated genes is: `r sum(genes$State=="up")`
+
+The fraction of up-regulated genes is: `r sum(genes$State=="up")/nrow(genes)`
+
+Now we will move onto the next project where we want to begin looking at economic and demographic data from various countries since 1952.
+
+# Demographic data from various countries
+
+```{r}
+url <- "https://raw.githubusercontent.com/jennybc/gapminder/master/inst/extdata/gapminder.tsv"
+
+gapminder <- read.delim(url)
+
+library(dplyr)
+library(gapminder)
+library(patchwork)
+
+gapminder_2007 <- gapminder %>% filter(year==2007)
+
+head(gapminder_2007)
+y <- ggplot(gapminder_2007)+
+  aes(x=gdpPercap,y=lifeExp,color=continent, size=pop)+
+  geom_point(alpha=0.5)
+y
+
+z <- ggplot(gapminder_2007)+
+  aes(x=gdpPercap,y=lifeExp,color=pop,size=pop)+
+  scale_size_area(max_size=10)+
+  geom_point(alpha=0.8)
+
+z
+
+x <- ggplot(gapminder_2007)+
+  aes(x=gdpPercap,y=lifeExp,color=continent,size=pop)+
+  geom_point(alpha=0.5)
+  scale_size_area(max_size=10)
+
+x
+
+
+
+
+```
+
+```{r fig.width=8, fig.height=6}
+
+(y | z) /
+  x
+```
+
+```{r}
+library(dplyr)
+gapminder_top5 <- gapminder %>% 
+  filter(year==2007) %>% 
+  arrange(desc(pop)) %>% 
+  top_n(5, pop)
+
+ggplot(gapminder_top5)+
+  geom_col(aes(x=country,y=pop))
+
+ggplot(gapminder)+
+  aes(continent,lifeExp)+
+  geom_violin()
+```
+
+# Animations!
+
+```{r}
+#/ eval: false
+#library(gapminder)
+#library(gganimate)
+#ggplot(gapminder)+
+#  aes(gdpPercap, lifeExp, size= pop, col=country)+
+#  geom_point(alpha = 0.7, show.legend = FALSE)+
+#  scale_colour_manual( values = country_colors)+
+#  scale_size(range=c(2,12))+
+#  scale_x_log10()+
+#  facet_wrap(~continent)+
+  #Animation
+#  labs(title = 'Year: {frame_time}', x= 'GDP per capita', y='life expectancy')+
+#  transition_time(year)+
+#  shadow_wake(wake_length=0.1, alpha= FALSE)
+
+```
+
+# Session Information
+
+```{r}
+sessionInfo()
+```
