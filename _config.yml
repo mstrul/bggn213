@@ -1,0 +1,13 @@
+theme: jekyll-theme-minimal
+
+logo: https://bioboot.github.io/bggn213_F22/assets/img/logo.png
+
+Title: Bioinformatics Class Portofolio 
+
+Body: This information comes under the _config.yml file 
+
+Font: Helvetica
+
+author:
+  name:  Max Strul
+  email: mstrul@ucsd.edu
