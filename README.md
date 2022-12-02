@@ -4,7 +4,7 @@ Classwork
 This is all my classwork for BGGN213, a class at UC San Diego
 Instructor: Barry Grant
 
-This is under the [README.md](https://github.com/mstrul/bggn213/main/README.md) file
+This is under the [README.md](https://github.com/mstrul/bggn213/blob/main/README.md) file
 
 - Class 1:
 - Class 2: 
