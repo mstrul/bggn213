@@ -1,0 +1,141 @@
+---
+title: "UnixNotes"
+author: "Max Strul"
+format: html
+editor: visual
+date: 11-16-22
+mainfont: Helvetica Neue
+toc: true
+---
+
+# Directories
+
+-   `pwd` print working directory in path format
+-   `ls` list files
+-   `cd` change directory
+-   `mkdir` make new directory
+-   `cd..` take me to parent
+-   `cd..\..` take me up two levels
+-   `cd..\..\..` take me up three levels, etc
+-   `cd.` current directory, useful for copying things
+-   `ls ... *pdf` \*filetype lists all files with this filetype
+-   `ls /Users/maxstrul/Desktop/BGGN213/Rfiles/Class14Unix/Unix`
+-   `ls ~/Desktop...` the Tilda saves us typing the home directory
+
+# Common Errors
+
+Be careful about spaces in file names and directories
+
+# Making Files
+
+-   `touch new_file_name.ex` touch is a function to make a new file
+    -   If you have spaces it will create multiple files, ex:
+        -   `touch new file.txt` will make a new file called "new" and "file.txt" so you can create multiple files with space separation
+
+# Removing Files
+
+-   `rm` removes files, you can remove multiple files or directories with spaces.
+
+# Renaming Files
+
+-   `mv fileOriginal fileNewFileName` This deletes the previous file and moves / renames it as the second argument
+-   `cp fileOriginal CopiedFileName` This copies a specific file and creates a new file with the second argument name
+
+# Pipe
+
+-   `|` pipe line or ssh
+-   `>` write to file (redirect)
+-   `>>` Append
+-   `<` read from file
+
+# Text editor
+
+-   `nano text.txt`
+-   `head text.txt`
+-   `more text.txt`
+-   `less text.txt`press Q to escape! Less is more...
+
+# Virtual Machines (VMs)
+
+-   `https://awsed.ucsd.edu/` AWS bggn213 offers free server access for up to 100\$
+    -   Ubuntu Server 20.04 LTS (HVM), SSD Volume Type
+    -   This takes you to the console where you can launch a new "instance"
+    -   This process of opening a new VM are called "request" or "launch"
+    -   Select "Launch Instance"
+    -   our example will be using "m5.2xlarge"
+        -   Setting our key pair
+        -   You have a public key and a private key
+        -   One key stays on your computer and one stays on the cloud
+            -   Create key pair "mstrul_bggn213"
+                -   instance name: "i-07e0ba0d9849f8096"
+            -   RSA
+            -   .pem
+            -   file name `mstrul_bggn213.pem`
+-   `Microsoft Azure` is another option, but most cloud computing is AWS
+    -   You can get free credits!
+-   `ssh` Secure shell
+    -   `chmod 400 mstrul_bggn213.pem` this locks the key against accidental overwriting
+    -   `ssh -i "mstrul_bggn213.pem" ubuntu@ec2-34-217-112-47.us-west-2.compute.amazonaws.com`
+-   `comand ^Z` pauses
+-   `ps` shows paused
+-   `kill` -
+-   `top` -
+-   `https://www.thegeekstuff.com/2010/05/unix-background-job/#:~:text=Press%20'CTRL%2BZ'%20which,command%20to%20execute%20in%20background.`
+
+# Setting up Virtual machimne
+
+-   sudo apt-get update (sudo being super user)
+-   
+
+# Downloading files
+
+-   `curl -O ftp://ftp.ncbi.nih.gov/refseq/M_musculus/mRNA_Prot/mouse.1.protein.faa.gz`
+
+-   `curl -O ftp://ftp.ncbi.nih.gov/refseq/M_musculus/mRNA_Prot/mouse.2.protein.faa.gz`
+
+-   `curl -O ftp://ftp.ncbi.nih.gov/refseq/D_rerio/mRNA_Prot/zebrafish.1.protein.faa.gz`
+
+-   Unzipping files
+
+-   gunzip: `gunzip *.faa.gz` note the \* (star) causes all files to become unzipped
+
+-   Looking at the head of the files
+
+    -   `head zebrafish.1.protein.faa`
+    -   `head -3 zebrafish.1.protein.faa` this loads just three lines
+
+# man pages
+
+-   `man ls`
+-   `man grep`
+
+# Parsing through data in files
+
+-   grep find match partners
+
+-   `grep`
+
+    -   \`grep "\>" zebra(tab)
+    -   this prints out everything!
+    -   instead: grep "\>" -c zebrafish.1.protein.faa
+    -   16358
+    -   13854 for mouse 1
+    -   30340 for mouse 2
+
+-   ctrl + C is **KILL** function
+
+# BLAST on UNIX
+
+Note: Blast is extremely effective when using UNIX/ BASH terminal
+
+-   `makeblastdb` Makes a blast database
+    -   you can create your own database of custom genes!
+-   `makeblastdb -in zebrafish.1.protein.faa -dbtype prot` makes a new blast directory using zebrafish as the database with the database type being proteins or prot
+-   `https://www.metagenomics.wiki/tools/blast/blastn-output-format-6`
+
+# Copying files back to your coputer
+
+-   `scp -i ~/Downloads/barry_bioinf.pem ubuntu@YOUR_IP_ADDRESS:~/work/mm-second.x.zebrafish.tsv`
+-   `scp -i keyfile user@remote.com:~/work/results.txt mycomputerfileNameresults.txt`
+-   `scp -i "/Users/maxstrul/Desktop/BGGN213/Rfiles/Class14Unix/Unix/class15/mstrul_bggn213.pem" ubuntu@ec2-34-217-112-47.us-west-2.compute.amazonaws.com:~/work/mm-second.x.zebrafish.tsv test`
+    -   note this needs to be done from your own computers terminal.

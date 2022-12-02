@@ -1,0 +1,191 @@
+---
+title: "Class 7 Lab: Machine Learning"
+format: html
+editor: visual
+author: Max Strul
+date: 10/19/22
+---
+
+## Intro to machine learning
+
+Unsupervised, supervised and reinforcement learning
+
+## Clustering
+
+K-means clustering
+
+The problem with k-means clustering is that we have to first declare how many groups we want the data to be separated into.
+
+We will start by making up some data to cluster
+
+```{r}
+pds_1 <- rnorm(30,-3)
+pds_2 <- rnorm(30,3)
+pds_3 <- c(pds_1,pds_2)
+#you can use mean=3 or just a 3
+hist(pds_3)
+```
+
+K=2 groups
+
+```{r}
+clustering <- cbind(x=pds_3,y=rev(pds_3))
+plot(clustering)
+```
+
+We can visually see that we have created two distinct groups.
+
+How does k-means clustering in base R work?
+
+`kmeans()` is the function.
+
+```{r}
+km_1<-kmeans(clustering, centers=2, nstart=10)
+km_1
+plot(clustering, col=km_1$cluster)
+points(km_1$centers,col="blue",pch=15,cex=2)
+
+```
+
+```{r}
+km_2<-kmeans(clustering, centers=4, nstart=20)
+km_2
+
+plot(clustering, col=km_2$cluster)
+points(km_2$centers, col="blue",pch=15,cex=2)
+```
+
+library(ggplot2) masked_dataset \<- cbind(data=clustering,mask=km_1$cluster) print(km_1$cluster) print(masked_dataset) ggplot(data=masked_dataset)+ aes(x,y,col=mask)+ geom_point()
+
+Some other ways you can go about performing clustering is through `hclust()`, which performs hierarchical clustering, as well as `dist()` which creates a distance matrix
+
+Hierarchical clustering
+
+```{r}
+#there are two main functions: 
+#dist matrix is required for a hierarchical clustering
+#hclust()
+#dist()
+hc <- hclust(dist(clustering))
+hc
+#hc has labeles as: hc$merge,height,order,labels,method,call
+plot(hc)
+abline(h=4.5,col="red")
+```
+
+To get access to cluster memberships you can cut the tree which yields branches. To do so you can utilize the height functionality and cut the data off into groups at a specific height. `cutree()`
+
+```{r}
+cutvaluesmembershipvector <- cutree(hc,h=4.5)
+cutvaluesmembershipvector
+#We can now plot this
+plot(clustering, col=cutvaluesmembershipvector)
+```
+
+## Dimensionality reduction, visualization and 'structure' analysis
+
+Hands on with principal component analysis
+
+You can use a principal component to describe your data in a better way that properly uses the coordinate system.
+
+It does so in an orthogonal (perpendicular way)
+
+You could *theoretically* utilize components that do not create orthogonal means of analysis.
+
+PCA reduces dimensional Visualizes multidimensional data Chooses the most useful variables Identifies groupings of objects Helps you identify out liars.
+
+## Lab Worksheet
+
+First we need to obtain the data
+
+```{r}
+url <- "https://tinyurl.com/UK-foods"
+uk_food <- read.csv(url)
+
+```
+
+Q1. How many rows and columns are in your new data frame named x? What R functions could you use to answer this questions?
+
+```{r}
+ncol(uk_food)
+nrow(uk_food)
+dim(uk_food)
+uk_food_w_headers <- read.csv(url,row.names = 1)
+dim(uk_food_w_headers)
+```
+
+Q2. Which approach to solving the 'row-names problem' mentioned above do you prefer and why? Is one approach more robust than another under certain circumstances?
+
+I prefer the row.names being called when you read the csv. I think this method is more robust because you can run it multiple times. If you perform the other one then it will start to remove many points off the top of your data.
+
+```{r}
+
+barplot(as.matrix(uk_food_w_headers), beside=T, col=rainbow(nrow(uk_food_w_headers)))
+
+```
+
+Q3: Changing what optional argument in the above barplot() function results in the following plot?
+
+If you want to modify the plot to the desired plot, you need to plot it with beside= FALSE
+
+```{r}
+
+barplot(as.matrix(uk_food_w_headers), beside=FALSE, col=rainbow(nrow(uk_food_w_headers)))
+
+```
+
+```{r}
+pairs(uk_food_w_headers, col=rainbow(17), pch=16)
+```
+
+Q4: Generating all pairwise plots may help somewhat. Can you make sense of the following code and resulting figure? What does it mean if a given point lies on the diagonal for a given plot?
+
+This plot is essentially a fold change plot which compares two larger groups and analyzes specific characteristics within those two groups and measures which one is higher or lower when comparing the two.
+
+This creates a matrix of scatter plots which looks for pair relationships between certain characteristics / labels within the data set and their larger groups. It looks at all possible pairs of the larger groups and compares if one has a specific characteristic/label that is more highly correlated with a specific larger group. As seen in plot 1,1 (bottom left), there is a blue point that is far off the line, which means that it is more important and has higher correlation in the larger group of England when compared to N.Ireland. Similarly there is an orange dot off the line, which means that the orange category is more tightly correlated and different than compared to England. This means that you can look at all possible pairs and try to see what specific variables are the most different between two countries.
+
+This plot is limited in how many graphs you can show and analyze.
+
+If a point is on a diagonal for a given plot it means the two values are equal compared between the two larger groups.
+
+```{r}
+row.names(uk_food_w_headers)
+col_vector<-rainbow(10)
+col_vector
+```
+
+Q5: What is the main differences between N. Ireland and the other countries of the UK in terms of this data-set?
+
+We cant answer it with our current tool set, so we will answer it with PCA.
+
+To do so you need the `prcomp()`. However you must first transpose the data.frame matrix with `t()` function which swaps Y with X
+
+```{r}
+
+pca<-prcomp((t(uk_food_w_headers)))
+summary(pca)
+
+```
+
+This shows that our PC1 obtains 67% of the variance. The cumulative proportion shows that PC1 and PC2 gives us 96.5% of all variance.
+
+A new plot against these two variables will cover about 96% of all variance.
+
+Q6. Complete the code below to generate a plot of PC1 vs PC2. The second line adds text labels over the data points.
+
+```{r}
+pca$x[,1] #gives us the values of PC1 for our data set 
+pca$x[1,] #gives us all englands values
+
+plot(pca$x[,1], pca$x[,2], xlab="PC1", ylab="PC2", xlim=c(-270,500))
+
+#Q8. Customize your plot 
+#so that the colors of the country names 
+#match the colors in our UK and Ireland map 
+text(pca$x[,1], pca$x[,2], colnames(uk_food_w_headers),col =c("gold","red","blue","green"))
+```
+
+```{r}
+par(mar=c(10, 3, 0.35, 0))
+barplot( pca$rotation[,1], las=2 )
+```

@@ -1,0 +1,191 @@
+---
+title: "Class_9_structural_bioinformatics"
+author: "Max Strul"
+format: pdf
+editor: visual
+date: 10-26-2022
+toc: TRUE
+---
+
+## Getting started viewing pdb files
+
+You can use multiple viewing tools such as Chimerax or the free online website molstart `https://molstar.org/viewer/`
+
+Q1: What percentage of structures in the PDB are solved by X-Ray and Electron Microscopy.
+
+```{r}
+total_xray <- 150417/171351
+total_xray
+total_em <- 8586/171351
+total_em
+```
+
+
+Q2: What proportion of structures in the PDB are protein?
+
+```{r}
+171351/(171351+10459+10919+4037+191+22)
+
+
+```
+
+
+Q3: Type HIV in the PDB website search box on the home page and determine how many HIV-1 protease structures are in the current PDB?
+
+4707
+
+
+# bio3d and its function in loading PDB files
+
+To load and interact with pdb files into R we need a package `bio3d`
+
+```{r}
+library(bio3d)
+```
+
+```{r}
+example_pdb <-read.pdb("1hsg")
+example_pdb
+head(example_pdb$atom)
+```
+
+Looking at other proteins: Adenylate Kinase
+
+```{r}
+adk <- read.pdb("6s36")
+adk
+```
+
+We can use important information here such as the "(residues/Calpha atoms#: 214)" which tells us there are 214 amino acids.
+
+We can look at all other attributes.
+
+```{r}
+attributes(adk)
+```
+
+We can analyze the functional motions of structure
+
+# Predicting functional motions of a single structure
+
+The first thing we will do is plot the normal mode analysis. This is a structural bioinformatics method to determine and predict the protein flexibility and potential functional motions.
+
+```{r}
+# Perform flexiblity prediction
+m <- nma(adk)
+plot(m)
+```
+
+Now we want to use this to make a movie and plot the trajectory of certain residues
+
+```{r}
+mktrj(m, file="adk_m7.pdb")
+```
+
+This function produces a file that has the multiple states and can be opened in molstar to view a movie of the enzyme different conformation changes as calculated by the normal mode analysis (which is performed via a force field calculation modeling atomic bonds as springs)
+
+Now what we want to do is obtain all homolog of this protein and see what their conformation changes are like, and which ones are active and which ones are inactive, etc.
+
+# Using R to create a repository of homologs in order to do a comparative analysis across structures
+
+We first need to load in all the predicted similar protein structures:
+
+First we want to get our initial protein of interest, in this case it is ADK.
+
+We will then `get.seq()` on this protein, then use this sequence to search a protein database (PDB database) with the function `blast.pdb()`, then we will get a list of all homologs and get their .pdb files with `get.pdb()`
+
+```{r}
+#aminoacidseq <- get.seq("1ake_A")
+#blast_results <- blast.pdb(aminoacidseq) #commented out but usually you would run this
+#we can plot a summary plot
+#hits <- plot(blast_results)
+#this graph has the Y axis in units of -log(Evalue)
+
+hits <- NULL
+hits$pdb.id <- c('1AKE_A','6S36_A','6RZE_A','3HPR_A','1E4V_A','5EJE_A','1E4Y_A','3X2S_A','6HAP_A','6HAM_A','4K46_A','3GMT_A','4PZL_A')
+```
+
+We can see that there are some Nhits = \# where there are some amount that are good enough based on their E value
+
+```{r}
+hits$pdb.id
+
+#pdb.annotate(hits$pdb.id)
+```
+
+Now we want to obtain our zipped/folder package of our pdb files.
+
+```{r}
+files <- get.pdb(hits$pdb.id, path="pdbs", split=TRUE,gzip=TRUE)
+```
+
+Now we want to overlap all of them:
+
+```{r}
+
+pdbs <- pdbaln(files, fit = TRUE, exefile="msa")
+#pdbs
+```
+
+```{r}
+ids <- basename.pdb(pdbs$id)
+
+#plot(pdbs, labels=ids)
+
+```
+
+(sequencealignment.png)
+
+Then we want to start our comparative analysis with a principal comparative analysis
+
+# Principal component analysis
+
+```{r}
+pc.xray <- pca(pdbs)
+plot(pc.xray)
+```
+
+You can do calculate RMSD to do structure-based clustering
+
+```{r}
+rd <- rmsd(pdbs)
+hc.rd <- hclust(dist(rd))
+grps.rd <- cutree(hc.rd, k=3)
+plot(pc.xray, 1:2, col="grey50", bg=grps.rd, pch=21, cex=1)
+```
+
+Here we see there are clearly two different groups 
+
+When we plot this and when we perform mktrj we are essentially creating dots between the two different structural groups (marked here in red and black)
+
+When we compare inhibitor some are more inhibited than others, is there any way that this plot determines this? Short answer; no, not in this initial plotting at least. It is possible that if you were to characterize the inhibition of certain structures and make that another variable mask you could theoretically perform a PCA to determine a separating function that figures out how you could develop and make a trajectory between low inhibition and more inhibition
+
+```{r}
+pc1 <- mktrj(pc.xray, pc=1, file="pc_1.pdb")
+
+```
+
+
+
+```{r}
+library(ggplot2)
+library(ggrepel)
+
+df <- data.frame(PC1=pc.xray$z[,1], 
+                 PC2=pc.xray$z[,2], 
+                 col=as.factor(grps.rd),
+                 ids=ids)
+
+p <- ggplot(df) + 
+  aes(PC1, PC2, col=col, label=ids) +
+  geom_point(size=2) +
+  geom_text_repel(max.overlaps = 20) +
+  theme(legend.position = "none")
+p
+```
+
+```{r}
+modes <- nma(pdbs)
+plot(modes, pdbs, col=grps.rd)
+```
+

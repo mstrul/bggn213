@@ -1,0 +1,200 @@
+---
+title: "Class13"
+author: "Max Strul"
+format: pdf
+editor: visual
+toc: true
+date: 11-9-2022
+---
+
+# Outline for setting up RNAseq data
+
+-   1.) Read input files,
+    -   a.) countdata
+    -   b.) coldata
+-   2.) Check and fix
+    -   a.) remove zero count genes across all
+-   3.)DESEQ
+    -   a.) plot of Log2fc vs -log(p-value)
+    -   b.)write csv of results
+-   4.) Annotation
+-   5.) Pathway analysis
+
+Getting our data ready:
+
+```{r}
+library("DESeq2")
+```
+
+# ReadInputFiles
+
+```{r}
+metaFile <- "GSE37704_metadata.csv"
+countFile <- "GSE37704_featurecounts.csv"
+colData = read.csv(metaFile, row.names = 1)
+head(colData)
+countdata = read.csv(countFile, row.names=1)
+head(countdata)
+length(countdata$SRR493366)
+```
+
+```{r}
+countData <- as.matrix(countdata[,-1])
+head(countData)
+
+```
+
+Whats the point of having colnames if our data frame can initially just have the experimental conditions?
+
+# Check and Fix
+
+```{r}
+counts <- countData[rowSums(countData)!=0,]
+head(counts)
+length(counts[,1])
+```
+
+number of genes removed
+
+```{r}
+19808-15975
+```
+
+# QC wth PCA
+
+the `prcomp()` function in base R can do some "QC". It will check if there are unique groups differentially separated based on the read counts
+
+For prcomps we will ensure that we scale our data
+
+```{r}
+pca <- prcomp(t(counts),scale=TRUE)
+summary(pca)
+```
+
+Here we see the frist two PCS cover about 82 % of variance
+
+```{r}
+plot(pca$x[,1],pca$x[,2],col=factor(colData$condition))
+```
+
+Why does PCA give QC? Cant a PCA be used to find variance unrelated to the different groups regardless of any other data? its job is to find some way to manipulate the data to find differences in the groups that allow us to separate it out? \# DESeq
+
+```{r}
+dds = DESeqDataSetFromMatrix(countData=counts,
+                             colData = colData,
+                             design=~condition)
+dds = DESeq(dds)
+
+dds
+```
+
+```{r}
+res = results(dds)
+
+summary(res)
+```
+
+```{r}
+plot(res$log2FoldChange,-log(res$padj))
+```
+
+```{r}
+mycols <- rep("gray",nrow(res))
+
+mycols[abs(res$log2FoldChange)>2] <- "red"
+inds <- (res$padj<0.05 & abs(res$log2FoldChange)>2)
+mycols[inds] <- "blue"
+plot(res$log2FoldChange, - log(res$padj),col=mycols, xlab="Log2(FoldChange)", ylab="-Log(P-value)")
+
+```
+
+# Annotation
+
+```{r}
+library("AnnotationDbi")
+library("org.Hs.eg.db")
+columns(org.Hs.eg.db)
+
+res$symbol = mapIds(org.Hs.eg.db,
+                    keys=rownames(counts),
+                    keytype="ENSEMBL",
+                    column="SYMBOL")
+res$entrez = mapIds(org.Hs.eg.db,
+                    keys=rownames(counts),
+                    keytype="ENSEMBL",
+                    column="ENTREZID")
+res$name = mapIds(org.Hs.eg.db,
+                  keys=rownames(counts),
+                  keytype="ENSEMBL",
+                  column="GENENAME")
+head(res)
+```
+
+loading up pathway analysis
+
+# Pathway Analysis
+
+```{r}
+library("pathview")
+library("gage")
+library("gageData")
+data("kegg.sets.hs")
+data("sigmet.idx.hs")
+kegg.sets.hs=kegg.sets.hs[sigmet.idx.hs]
+foldchanges=res$log2FoldChange
+names(foldchanges)=res$entrez
+head(foldchanges)
+```
+
+gage pathway analysis
+
+```{r}
+
+keggres = gage(foldchanges,gsets=kegg.sets.hs)
+
+attributes(keggres)
+head(keggres$less)
+head(keggres$greater)
+```
+
+Can I create my own gsets? a list of known symbols or entrez iDS? and see what is less or greater?
+
+pathview function
+
+```{r}
+pathview(gene.data=foldchanges,pathway.id="hsa04110")
+pathview(gene.data=foldchanges,pathway.id="hsa00140")
+```
+
+```{r}
+data(go.sets.hs)
+data(go.subs.hs)
+gobpsets = go.sets.hs[go.subs.hs$BP]
+#gobpsets = go.sets.hs#[go.subs.hs$BP]
+gobpres = gage(foldchanges,gsets=gobpsets, same.dir=TRUE)
+lapply(gobpres,head)
+```
+
+```{r}
+sig_genes <- res[res$padj <= 0.05 & !is.na(res$padj), "symbol"]
+print(paste("Total number of significant genes:", length(sig_genes)))
+write.table(sig_genes, file="significant_genes.txt", row.names=FALSE, col.names=FALSE, quote=FALSE)
+```
+
+```{r}
+#library("clusterProfiler")
+#library("tidyverse")
+#x <- as.data.frame(res)
+#y <- filter(x,log2FoldChange < (-2), padj < 0.05)
+```
+
+Analysis from reactome:
+
+```{r}
+results_from_reactome <- read.csv("result.csv")
+head(results_from_reactome)
+```
+
+```{r}
+sessionInfo()
+```

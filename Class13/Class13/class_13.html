@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.189">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Max Strul">
+
+<title>Class13</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="class_13_files/libs/clipboard/clipboard.min.js"></script>
+<script src="class_13_files/libs/quarto-html/quarto.js"></script>
+<script src="class_13_files/libs/quarto-html/popper.min.js"></script>
+<script src="class_13_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="class_13_files/libs/quarto-html/anchor.min.js"></script>
+<link href="class_13_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="class_13_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="class_13_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="class_13_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="class_13_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Class13</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Max Strul </p>
+          </div>
+  </div>
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="outline-for-setting-up-rnaseq-data" class="level1">
+<h1>Outline for setting up RNAseq data</h1>
+<ul>
+<li>1.) Read input files,
+<ul>
+<li>a.) countdata</li>
+<li>b.) coldata</li>
+</ul></li>
+<li>2.) Check and fix
+<ul>
+<li>a.) remove zero count genes across all</li>
+</ul></li>
+<li>3.)DESEQ
+<ul>
+<li>a.) plot of Log2fc vs -log(p-value)</li>
+<li>b.)write csv of results</li>
+</ul></li>
+<li>4.) Annotation</li>
+<li>5.) Pathway analysis</li>
+</ul>
+<p>Getting our data ready:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"DESeq2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: S4Vectors</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: stats4</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: BiocGenerics</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'BiocGenerics'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    IQR, mad, sd, var, xtabs</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    anyDuplicated, append, as.data.frame, basename, cbind, colnames,
+    dirname, do.call, duplicated, eval, evalq, Filter, Find, get, grep,
+    grepl, intersect, is.unsorted, lapply, Map, mapply, match, mget,
+    order, paste, pmax, pmax.int, pmin, pmin.int, Position, rank,
+    rbind, Reduce, rownames, sapply, setdiff, sort, table, tapply,
+    union, unique, unsplit, which.max, which.min</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'S4Vectors'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    expand.grid, I, unname</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: IRanges</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: GenomicRanges</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: GenomeInfoDb</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: SummarizedExperiment</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: MatrixGenerics</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: matrixStats</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'MatrixGenerics'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:matrixStats':
+
+    colAlls, colAnyNAs, colAnys, colAvgsPerRowSet, colCollapse,
+    colCounts, colCummaxs, colCummins, colCumprods, colCumsums,
+    colDiffs, colIQRDiffs, colIQRs, colLogSumExps, colMadDiffs,
+    colMads, colMaxs, colMeans2, colMedians, colMins, colOrderStats,
+    colProds, colQuantiles, colRanges, colRanks, colSdDiffs, colSds,
+    colSums2, colTabulates, colVarDiffs, colVars, colWeightedMads,
+    colWeightedMeans, colWeightedMedians, colWeightedSds,
+    colWeightedVars, rowAlls, rowAnyNAs, rowAnys, rowAvgsPerColSet,
+    rowCollapse, rowCounts, rowCummaxs, rowCummins, rowCumprods,
+    rowCumsums, rowDiffs, rowIQRDiffs, rowIQRs, rowLogSumExps,
+    rowMadDiffs, rowMads, rowMaxs, rowMeans2, rowMedians, rowMins,
+    rowOrderStats, rowProds, rowQuantiles, rowRanges, rowRanks,
+    rowSdDiffs, rowSds, rowSums2, rowTabulates, rowVarDiffs, rowVars,
+    rowWeightedMads, rowWeightedMeans, rowWeightedMedians,
+    rowWeightedSds, rowWeightedVars</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: Biobase</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'Biobase'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:MatrixGenerics':
+
+    rowMedians</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:matrixStats':
+
+    anyMissing, rowMedians</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>metaFile <span class="ot">&lt;-</span> <span class="st">"GSE37704_metadata.csv"</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>countFile <span class="ot">&lt;-</span> <span class="st">"GSE37704_featurecounts.csv"</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>colData <span class="ot">=</span> <span class="fu">read.csv</span>(metaFile, <span class="at">row.names =</span> <span class="dv">1</span>)</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(colData)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              condition
+SRR493366 control_sirna
+SRR493367 control_sirna
+SRR493368 control_sirna
+SRR493369      hoxa1_kd
+SRR493370      hoxa1_kd
+SRR493371      hoxa1_kd</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>countdata <span class="ot">=</span> <span class="fu">read.csv</span>(countFile, <span class="at">row.names=</span><span class="dv">1</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(countdata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                length SRR493366 SRR493367 SRR493368 SRR493369 SRR493370
+ENSG00000186092    918         0         0         0         0         0
+ENSG00000279928    718         0         0         0         0         0
+ENSG00000279457   1982        23        28        29        29        28
+ENSG00000278566    939         0         0         0         0         0
+ENSG00000273547    939         0         0         0         0         0
+ENSG00000187634   3214       124       123       205       207       212
+                SRR493371
+ENSG00000186092         0
+ENSG00000279928         0
+ENSG00000279457        46
+ENSG00000278566         0
+ENSG00000273547         0
+ENSG00000187634       258</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(countdata<span class="sc">$</span>SRR493366)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 19808</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>countData <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(countdata[,<span class="sc">-</span><span class="dv">1</span>])</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(countData)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                SRR493366 SRR493367 SRR493368 SRR493369 SRR493370 SRR493371
+ENSG00000186092         0         0         0         0         0         0
+ENSG00000279928         0         0         0         0         0         0
+ENSG00000279457        23        28        29        29        28        46
+ENSG00000278566         0         0         0         0         0         0
+ENSG00000273547         0         0         0         0         0         0
+ENSG00000187634       124       123       205       207       212       258</code></pre>
+</div>
+</div>
+<p>Whats the point of having colnames if our data frame can initially just have the experimental conditions?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>counts <span class="ot">&lt;-</span> countData[<span class="fu">rowSums</span>(countData)<span class="sc">!=</span><span class="dv">0</span>,]</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(counts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                SRR493366 SRR493367 SRR493368 SRR493369 SRR493370 SRR493371
+ENSG00000279457        23        28        29        29        28        46
+ENSG00000187634       124       123       205       207       212       258
+ENSG00000188976      1637      1831      2383      1226      1326      1504
+ENSG00000187961       120       153       180       236       255       357
+ENSG00000187583        24        48        65        44        48        64
+ENSG00000187642         4         9        16        14        16        16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>(counts[,<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 15975</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="dv">19808-15975</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3833</code></pre>
+</div>
+</div>
+</section>
+<section id="qc-wth-pca" class="level1">
+<h1>QC wth PCA</h1>
+<p>the <code>prcomp()</code> function in base R can do some “QC”. It will check if there are unique groups differentially separated based on the read counts</p>
+<p>For prcomps we will ensure that we scale our data</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>pca <span class="ot">&lt;-</span> <span class="fu">prcomp</span>(<span class="fu">t</span>(counts),<span class="at">scale=</span><span class="cn">TRUE</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(pca)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Importance of components:
+                           PC1     PC2      PC3      PC4      PC5       PC6
+Standard deviation     87.7211 73.3196 32.89604 31.15094 29.18417 6.648e-13
+Proportion of Variance  0.4817  0.3365  0.06774  0.06074  0.05332 0.000e+00
+Cumulative Proportion   0.4817  0.8182  0.88594  0.94668  1.00000 1.000e+00</code></pre>
+</div>
+</div>
+<p>Here we see the frist two PCS cover about 82 % of variance</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pca<span class="sc">$</span>x[,<span class="dv">1</span>],pca<span class="sc">$</span>x[,<span class="dv">2</span>],<span class="at">col=</span><span class="fu">factor</span>(colData<span class="sc">$</span>condition))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="class_13_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Why does PCA give QC? Cant a PCA be used to find variance unrelated to the different groups regardless of any other data? its job is to find some way to manipulate the data to find differences in the groups that allow us to separate it out?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>dds <span class="ot">=</span> <span class="fu">DESeqDataSetFromMatrix</span>(<span class="at">countData=</span>counts,</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>                             <span class="at">colData =</span> colData,</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>                             <span class="at">design=</span><span class="sc">~</span>condition)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in DESeqDataSet(se, design = design, ignoreRank): some variables in
+design formula are characters, converting to factors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>dds <span class="ot">=</span> <span class="fu">DESeq</span>(dds)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>estimating size factors</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>estimating dispersions</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>gene-wise dispersion estimates</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>mean-dispersion relationship</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>final dispersion estimates</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>fitting model and testing</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>dds</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>class: DESeqDataSet 
+dim: 15975 6 
+metadata(1): version
+assays(4): counts mu H cooks
+rownames(15975): ENSG00000279457 ENSG00000187634 ... ENSG00000276345
+  ENSG00000271254
+rowData names(22): baseMean baseVar ... deviance maxCooks
+colnames(6): SRR493366 SRR493367 ... SRR493370 SRR493371
+colData names(2): condition sizeFactor</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">=</span> <span class="fu">results</span>(dds)</span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+out of 15975 with nonzero total read count
+adjusted p-value &lt; 0.1
+LFC &gt; 0 (up)       : 4349, 27%
+LFC &lt; 0 (down)     : 4396, 28%
+outliers [1]       : 0, 0%
+low counts [2]     : 1237, 7.7%
+(mean count &lt; 0)
+[1] see 'cooksCutoff' argument of ?results
+[2] see 'independentFiltering' argument of ?results</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res<span class="sc">$</span>log2FoldChange,<span class="sc">-</span><span class="fu">log</span>(res<span class="sc">$</span>padj))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="class_13_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>mycols <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="st">"gray"</span>,<span class="fu">nrow</span>(res))</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>mycols[<span class="fu">abs</span>(res<span class="sc">$</span>log2FoldChange)<span class="sc">&gt;</span><span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">"red"</span></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>inds <span class="ot">&lt;-</span> (res<span class="sc">$</span>padj<span class="sc">&lt;</span><span class="fl">0.05</span> <span class="sc">&amp;</span> <span class="fu">abs</span>(res<span class="sc">$</span>log2FoldChange)<span class="sc">&gt;</span><span class="dv">2</span>)</span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>mycols[inds] <span class="ot">&lt;-</span> <span class="st">"blue"</span></span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(res<span class="sc">$</span>log2FoldChange, <span class="sc">-</span> <span class="fu">log</span>(res<span class="sc">$</span>padj),<span class="at">col=</span>mycols, <span class="at">xlab=</span><span class="st">"Log2(FoldChange)"</span>, <span class="at">ylab=</span><span class="st">"-Log(P-value)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="class_13_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"AnnotationDbi"</span>)</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"org.Hs.eg.db"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code></code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="fu">columns</span>(org.Hs.eg.db)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "ACCNUM"       "ALIAS"        "ENSEMBL"      "ENSEMBLPROT"  "ENSEMBLTRANS"
+ [6] "ENTREZID"     "ENZYME"       "EVIDENCE"     "EVIDENCEALL"  "GENENAME"    
+[11] "GENETYPE"     "GO"           "GOALL"        "IPI"          "MAP"         
+[16] "OMIM"         "ONTOLOGY"     "ONTOLOGYALL"  "PATH"         "PFAM"        
+[21] "PMID"         "PROSITE"      "REFSEQ"       "SYMBOL"       "UCSCKG"      
+[26] "UNIPROT"     </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>symbol <span class="ot">=</span> <span class="fu">mapIds</span>(org.Hs.eg.db,</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">keys=</span><span class="fu">rownames</span>(counts),</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">keytype=</span><span class="st">"ENSEMBL"</span>,</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">column=</span><span class="st">"SYMBOL"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>'select()' returned 1:many mapping between keys and columns</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>entrez <span class="ot">=</span> <span class="fu">mapIds</span>(org.Hs.eg.db,</span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">keys=</span><span class="fu">rownames</span>(counts),</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">keytype=</span><span class="st">"ENSEMBL"</span>,</span>
+<span id="cb61-4"><a href="#cb61-4" aria-hidden="true" tabindex="-1"></a>                    <span class="at">column=</span><span class="st">"ENTREZID"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>'select()' returned 1:many mapping between keys and columns</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>name <span class="ot">=</span> <span class="fu">mapIds</span>(org.Hs.eg.db,</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a>                  <span class="at">keys=</span><span class="fu">rownames</span>(counts),</span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>                  <span class="at">keytype=</span><span class="st">"ENSEMBL"</span>,</span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a>                  <span class="at">column=</span><span class="st">"GENENAME"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>'select()' returned 1:many mapping between keys and columns</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(res)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>log2 fold change (MLE): condition hoxa1 kd vs control sirna 
+Wald test p-value: condition hoxa1 kd vs control sirna 
+DataFrame with 6 rows and 9 columns
+                 baseMean log2FoldChange     lfcSE       stat      pvalue
+                &lt;numeric&gt;      &lt;numeric&gt; &lt;numeric&gt;  &lt;numeric&gt;   &lt;numeric&gt;
+ENSG00000279457   29.9136      0.1792571 0.3248216   0.551863 5.81042e-01
+ENSG00000187634  183.2296      0.4264571 0.1402658   3.040350 2.36304e-03
+ENSG00000188976 1651.1881     -0.6927205 0.0548465 -12.630158 1.43990e-36
+ENSG00000187961  209.6379      0.7297556 0.1318599   5.534326 3.12428e-08
+ENSG00000187583   47.2551      0.0405765 0.2718928   0.149237 8.81366e-01
+ENSG00000187642   11.9798      0.5428105 0.5215598   1.040744 2.97994e-01
+                       padj      symbol      entrez                   name
+                  &lt;numeric&gt; &lt;character&gt; &lt;character&gt;            &lt;character&gt;
+ENSG00000279457 6.86555e-01          NA          NA                     NA
+ENSG00000187634 5.15718e-03      SAMD11      148398 sterile alpha motif ..
+ENSG00000188976 1.76549e-35       NOC2L       26155 NOC2 like nucleolar ..
+ENSG00000187961 1.13413e-07      KLHL17      339451 kelch like family me..
+ENSG00000187583 9.19031e-01     PLEKHN1       84069 pleckstrin homology ..
+ENSG00000187642 4.03379e-01       PERM1       84808 PPARGC1 and ESRR ind..</code></pre>
+</div>
+</div>
+<p>loading up pathway analysis</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"pathview"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>##############################################################################
+Pathview is an open source software package distributed under GNU General
+Public License version 3 (GPLv3). Details of GPLv3 is available at
+http://www.gnu.org/licenses/gpl-3.0.html. Particullary, users are required to
+formally cite the original Pathview paper (not just mention it) in publications
+or products. For details, do citation("pathview") within R.
+
+The pathview downloads and uses KEGG data. Non-academic uses may require a KEGG
+license agreement (details at http://www.kegg.jp/kegg/legal.html).
+##############################################################################</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"gage"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code></code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"gageData"</span>)</span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"kegg.sets.hs"</span>)</span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"sigmet.idx.hs"</span>)</span>
+<span id="cb71-4"><a href="#cb71-4" aria-hidden="true" tabindex="-1"></a>kegg.sets.hs<span class="ot">=</span>kegg.sets.hs[sigmet.idx.hs]</span>
+<span id="cb71-5"><a href="#cb71-5" aria-hidden="true" tabindex="-1"></a>foldchanges<span class="ot">=</span>res<span class="sc">$</span>log2FoldChange</span>
+<span id="cb71-6"><a href="#cb71-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(foldchanges)<span class="ot">=</span>res<span class="sc">$</span>entrez</span>
+<span id="cb71-7"><a href="#cb71-7" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(foldchanges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       &lt;NA&gt;      148398       26155      339451       84069       84808 
+ 0.17925708  0.42645712 -0.69272046  0.72975561  0.04057653  0.54281049 </code></pre>
+</div>
+</div>
+<p>gage pathway analysis</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a>keggres <span class="ot">=</span> <span class="fu">gage</span>(foldchanges,<span class="at">gsets=</span>kegg.sets.hs)</span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a><span class="fu">attributes</span>(keggres)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$names
+[1] "greater" "less"    "stats"  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(keggres<span class="sc">$</span>less)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                         p.geomean stat.mean        p.val
+hsa04110 Cell cycle                   8.995727e-06 -4.378644 8.995727e-06
+hsa03030 DNA replication              9.424076e-05 -3.951803 9.424076e-05
+hsa03013 RNA transport                1.246882e-03 -3.059466 1.246882e-03
+hsa03440 Homologous recombination     3.066756e-03 -2.852899 3.066756e-03
+hsa04114 Oocyte meiosis               3.784520e-03 -2.698128 3.784520e-03
+hsa00010 Glycolysis / Gluconeogenesis 8.961413e-03 -2.405398 8.961413e-03
+                                            q.val set.size         exp1
+hsa04110 Cell cycle                   0.001448312      121 8.995727e-06
+hsa03030 DNA replication              0.007586381       36 9.424076e-05
+hsa03013 RNA transport                0.066915974      144 1.246882e-03
+hsa03440 Homologous recombination     0.121861535       28 3.066756e-03
+hsa04114 Oocyte meiosis               0.121861535      102 3.784520e-03
+hsa00010 Glycolysis / Gluconeogenesis 0.212222694       53 8.961413e-03</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(keggres<span class="sc">$</span>greater)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                        p.geomean stat.mean       p.val
+hsa04640 Hematopoietic cell lineage   0.002822776  2.833362 0.002822776
+hsa04630 Jak-STAT signaling pathway   0.005202070  2.585673 0.005202070
+hsa00140 Steroid hormone biosynthesis 0.007255099  2.526744 0.007255099
+hsa04142 Lysosome                     0.010107392  2.338364 0.010107392
+hsa04330 Notch signaling pathway      0.018747253  2.111725 0.018747253
+hsa04916 Melanogenesis                0.019399766  2.081927 0.019399766
+                                          q.val set.size        exp1
+hsa04640 Hematopoietic cell lineage   0.3893570       55 0.002822776
+hsa04630 Jak-STAT signaling pathway   0.3893570      109 0.005202070
+hsa00140 Steroid hormone biosynthesis 0.3893570       31 0.007255099
+hsa04142 Lysosome                     0.4068225      118 0.010107392
+hsa04330 Notch signaling pathway      0.4391731       46 0.018747253
+hsa04916 Melanogenesis                0.4391731       90 0.019399766</code></pre>
+</div>
+</div>
+<p>Can I create my own gsets? a list of known symbols or entrez iDS? and see what is less or greater?</p>
+<p>pathview function</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pathview</span>(<span class="at">gene.data=</span>foldchanges,<span class="at">pathway.id=</span><span class="st">"hsa04110"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>'select()' returned 1:1 mapping between keys and columns</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Info: Working in directory /Users/maxstrul/Desktop/BGGN213/Rfiles/Class13/Class13</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Info: Writing image file hsa04110.pathview.png</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pathview</span>(<span class="at">gene.data=</span>foldchanges,<span class="at">pathway.id=</span><span class="st">"hsa00140"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>'select()' returned 1:1 mapping between keys and columns</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Info: Working in directory /Users/maxstrul/Desktop/BGGN213/Rfiles/Class13/Class13</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Info: Writing image file hsa00140.pathview.png</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(go.sets.hs)</span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(go.subs.hs)</span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>gobpsets <span class="ot">=</span> go.sets.hs[go.subs.hs<span class="sc">$</span>BP]</span>
+<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a><span class="co">#gobpsets = go.sets.hs#[go.subs.hs$BP]</span></span>
+<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a>gobpres <span class="ot">=</span> <span class="fu">gage</span>(foldchanges,<span class="at">gsets=</span>gobpsets, <span class="at">same.dir=</span><span class="cn">TRUE</span>)</span>
+<span id="cb87-6"><a href="#cb87-6" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(gobpres,head)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$greater
+                                             p.geomean stat.mean        p.val
+GO:0007156 homophilic cell adhesion       8.519724e-05  3.824205 8.519724e-05
+GO:0002009 morphogenesis of an epithelium 1.396681e-04  3.653886 1.396681e-04
+GO:0048729 tissue morphogenesis           1.432451e-04  3.643242 1.432451e-04
+GO:0007610 behavior                       2.195494e-04  3.530241 2.195494e-04
+GO:0060562 epithelial tube morphogenesis  5.932837e-04  3.261376 5.932837e-04
+GO:0035295 tube development               5.953254e-04  3.253665 5.953254e-04
+                                              q.val set.size         exp1
+GO:0007156 homophilic cell adhesion       0.1951953      113 8.519724e-05
+GO:0002009 morphogenesis of an epithelium 0.1951953      339 1.396681e-04
+GO:0048729 tissue morphogenesis           0.1951953      424 1.432451e-04
+GO:0007610 behavior                       0.2243795      427 2.195494e-04
+GO:0060562 epithelial tube morphogenesis  0.3711390      257 5.932837e-04
+GO:0035295 tube development               0.3711390      391 5.953254e-04
+
+$less
+                                            p.geomean stat.mean        p.val
+GO:0048285 organelle fission             1.536227e-15 -8.063910 1.536227e-15
+GO:0000280 nuclear division              4.286961e-15 -7.939217 4.286961e-15
+GO:0007067 mitosis                       4.286961e-15 -7.939217 4.286961e-15
+GO:0000087 M phase of mitotic cell cycle 1.169934e-14 -7.797496 1.169934e-14
+GO:0007059 chromosome segregation        2.028624e-11 -6.878340 2.028624e-11
+GO:0000236 mitotic prometaphase          1.729553e-10 -6.695966 1.729553e-10
+                                                q.val set.size         exp1
+GO:0048285 organelle fission             5.841698e-12      376 1.536227e-15
+GO:0000280 nuclear division              5.841698e-12      352 4.286961e-15
+GO:0007067 mitosis                       5.841698e-12      352 4.286961e-15
+GO:0000087 M phase of mitotic cell cycle 1.195672e-11      362 1.169934e-14
+GO:0007059 chromosome segregation        1.658603e-08      142 2.028624e-11
+GO:0000236 mitotic prometaphase          1.178402e-07       84 1.729553e-10
+
+$stats
+                                          stat.mean     exp1
+GO:0007156 homophilic cell adhesion        3.824205 3.824205
+GO:0002009 morphogenesis of an epithelium  3.653886 3.653886
+GO:0048729 tissue morphogenesis            3.643242 3.643242
+GO:0007610 behavior                        3.530241 3.530241
+GO:0060562 epithelial tube morphogenesis   3.261376 3.261376
+GO:0035295 tube development                3.253665 3.253665</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a>sig_genes <span class="ot">&lt;-</span> res[res<span class="sc">$</span>padj <span class="sc">&lt;=</span> <span class="fl">0.05</span> <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(res<span class="sc">$</span>padj), <span class="st">"symbol"</span>]</span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Total number of significant genes:"</span>, <span class="fu">length</span>(sig_genes)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Total number of significant genes: 8147"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.table</span>(sig_genes, <span class="at">file=</span><span class="st">"significant_genes.txt"</span>, <span class="at">row.names=</span><span class="cn">FALSE</span>, <span class="at">col.names=</span><span class="cn">FALSE</span>, <span class="at">quote=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co">#library("clusterProfiler")</span></span>
+<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a><span class="co">#library("tidyverse")</span></span>
+<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a><span class="co">#x &lt;- as.data.frame(res)</span></span>
+<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a><span class="co">#y &lt;- filter(x,log2FoldChange &lt; (-2), padj &lt; 0.05)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Analysis from reactome:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1" aria-hidden="true" tabindex="-1"></a>results_from_reactome <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"result.csv"</span>)</span>
+<span id="cb93-2"><a href="#cb93-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(results_from_reactome)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  Pathway.identifier
+1      R-HSA-1236977
+2       R-HSA-983170
+3        R-HSA-69278
+4      R-HSA-1640170
+5        R-HSA-69618
+6       R-HSA-141444
+                                                                          Pathway.name
+1                                                           Endosomal/Vacuolar pathway
+2           Antigen Presentation: Folding, assembly and peptide loading of class I MHC
+3                                                                  Cell Cycle, Mitotic
+4                                                                           Cell Cycle
+5                                                           Mitotic Spindle Checkpoint
+6 Amplification  of signal from unattached  kinetochores via a MAD2  inhibitory signal
+  X.Entities.found X.Entities.total Entities.ratio Entities.pValue Entities.FDR
+1               76               82    0.005400777    0.0001670508    0.4211349
+2               89              108    0.007113219    0.0018116666    0.8046760
+3              409              596    0.039254429    0.0018299063    0.8046760
+4              495              734    0.048343542    0.0022879854    0.8046760
+5               89              111    0.007310808    0.0037350832    0.8046760
+6               77               94    0.006191135    0.0040032064    0.8046760
+  X.Reactions.found X.Reactions.total Reactions.ratio Species.identifier
+1                 4                 4    0.0002841313               9606
+2                15                16    0.0011365251               9606
+3               352               352    0.0250035516               9606
+4               449               451    0.0320358005               9606
+5                 7                 7    0.0004972297               9606
+6                 4                 4    0.0002841313               9606
+  Species.name
+1 Homo sapiens
+2 Homo sapiens
+3 Homo sapiens
+4 Homo sapiens
+5 Homo sapiens
+6 Homo sapiens
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Submitted.entities.found
+1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               CTSL;HLA-B;HLA-C;LNPEP;HLA-A;CTSV;B2M;CTSS;HLA-E
+2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           BCAP31;PDIA3;BECN1;SEC24B;SEC13;HSPA5;HLA-B;PIK3R4;TAP2;HLA-C;TAP1;HLA-A;ATG14;TAPBP;HLA-E;CANX;PIK3C3;CALR;SEC24D;B2M;SEC24C;SEC31A
+3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         RB1;NUP107;SMC3;SMC4;SMC2;PSMD8;PSMD6;PSMD4;PSMD5;AKT2;MYC;PSMD2;AKT3;PSMD3;PSMD1;PRKACA;GTSE1;CDK5RAP2;NUP214;CSNK2A2;PRKCA;EML4;NUP93;DYNC1LI1;PSME1;TXNIP;OPTN;NUP205;POM121;SEH1L;ANAPC16;CDCA5;RPN1;NCAPG;CDCA8;AAAS;ARPP19;NCAPH;SKA1;ANAPC10;SKA2;POM121C;NUP85;PRKAR2B;RAD21;CEP70;NUP88;PSMF1;CEP76;CEP78;VTI1B;PLK4;NCAPH2;PLK1;CDC7;CDC6;DHFR;CDKN1C;CDKN1A;CDKN1B;NCAPG2;CYB561D1;TUBA1C;NIPBL;TUBA1B;TUBA1A;NUF2;TK1;EMB;JAK2;NINL;LIN52;NDC1;NUDC;DYNLL1;DYNLL2;SIRT2;MZT2B;MZT2A;TUBB2B;TUBB2A;PSMA4;INCENP;USO1;CENPA;PSMB6;PSMB7;RPS27A;CENPT;CENPU;CDKN2B;CDKN2C;NDE1;TUBB4B;MZT1;PSMB8;CENPE;CENPF;CENPH;PSMC3;CENPI;PSMC1;TAOK1;CENPK;PSMC2;CENPL;CENPM;FOSB;NCAPD2;CENPN;NCAPD3;CEP41;CENPO;CENPP;CENPQ;GMNN;UBE2D1;CDC14A;PPP1CB;PPP1CC;TUBB6;TUBB3;PIM1;NEK2;KMT5A;PHLDA1;CEP135;ANAPC7;CEP131;UBE2E1;DYRK1A;VRK1;VRK2;CDC25C;LEMD3;LEMD2;TUBA4A;CDC25A;RBX1;CDC25B;CLIP1;AJUBA;ANAPC1;KPNB1;ANAPC2;TUBGCP2;MAX;CUL1;HMMR;PKMYT1;ORC5;ORC4;ORC6;ORC1;ORC3;TPR;ABL1;NEK8;ODF2;NEK6;NEK7;NDC80;CDK6;CDK4;CDK2;TUBGCP5;CDK1;TUBGCP6;TUBGCP3;TUBGCP4;HSP90AB1;NUMA1;MCM7;MCM8;CEP164;MCM10;FOXM1;SUMO1;SPDL1;TNPO1;LBR;RFC5;RFC3;HSP90AA1;PPP1R12A;RFC4;RFC1;RFC2;HAUS6;HAUS5;RANGAP1;SMC1A;HAUS2;TFDP1;DBF4;ESPL1;TFDP2;MCM3;BIRC5;MCM4;MCM5;MCM6;PPP1R12B;MCM2;RAB1A;HDAC1;SRC;VPS4A;NSL1;FZR1;CDC45;RBBP4;HAUS8;E2F1;E2F2;E2F4;E2F6;H2AZ1;H2AZ2;CEP152;CABLES1;PPP2R2A;CDC20;CDC23;PPP2R1B;PPP2R1A;CDC27;FBXO5;SKP2;CCN1;BTRC;CCNL1;TMPO;SKP1;ESCO1;CSNK1D;CSNK1E;KNL1;ESCO2;CSNK2B;AKAP9;TFAM;KIF20A;TP53;BLZF1;DSN1;CEP192;H4C8;CDT1;RCC2;ZWINT;POLA1;TPX2;POLA2;STAG2;CDC16;CC2D1A;CC2D1B;H2AX;TOP2A;FEN1;IDE;PCM1;XPO1;CNTRL;H3-3A;RAB8A;NDEL1;H3-3B;SEC13;GAA;TUBB;KIF23;TUBG2;TUBG1;H2AJ;KIF2A;KIF2C;MAPRE1;SFI1;SDCCAG8;DYNC1I2;PRIM2;PCNA;PRIM1;SSNA1;MIS12;CAPG;TYMS;PPP2CA;PPP2CB;LMNA;PCNT;DYNC1I1;H2BC9;GINS1;RANBP2;MPP2;DYNC1H1;GINS2;H2BC8;H2BC5;GINS3;GINS4;RPA1;RPA2;NEDD1;RPA3;DLC1;B9D2;SPC24;MAD2L1;SPC25;ERCC6L;NUP188;ZWILCH;PRDM5;BUB1B;PTTG1;CCND1;EP300;KNTC1;BANF1;BORA;LIG1;H2AC6;FBXW11;SGO1;SGO2;MAU2;CCNE2;CHMP4B;PSMD10;PSMD11;PSMD14;PSMD13;PDS5B;CCNB2;CCNB1;UBE2I;NUP155;UBE2C;SEM1;KIF18A;UBE2S;CHMP2B;CHMP2A;YWHAE;GSK3B;LMNB1;CKS1B;H2BC21;DBT;NUP62;MYBL2;POLE;YWHAG;PPP2R5D;MASTL;CKAP5;RBL2;CCNA2;RBL1;GORASP2;NUP50;GORASP1;H2BC11;NUP54;RBM23;CHMP7;ITGB3BP;DCTN2;DCTN1;DCTN3;LIN9;PSMB10;AURKB;AURKA;POLD3;CLN3;POLD4;POLD1;POLD2;TMEM208;MAPK1;NUP43;BUB3;BUB1;CLASP1;CLASP2;MAPK3;RBM39;RRM2;WEE1;POLE2;POLE3;NUP35;LPIN2;RAN;NUP37
+4 RB1;MDC1;NUP107;SMC3;SMC4;BACH1;SMC2;PSMD8;PSMD6;SCP2;PSMD4;PSMD5;AKT2;MYC;PSMD2;AKT3;PSMD3;PSMD1;PRKACA;GTSE1;CDK5RAP2;NUP214;DAXX;CSNK2A2;HUS1;PRKCA;EML4;NUP93;DYNC1LI1;PSME1;TXNIP;OPTN;RHNO1;PIF1;NUP205;POM121;SEH1L;ANAPC16;CDCA5;RPN1;NCAPG;CDCA8;AAAS;ARPP19;NCAPH;SKA1;ANAPC10;SKA2;POM121C;NUP85;PRKAR2B;RAD21;CEP70;NUP88;PSMF1;CEP76;CEP78;VTI1B;BARD1;PLK4;CTC1;NCAPH2;PLK1;CDC7;CDC6;DHFR;CDKN1C;CDKN1A;SMG1;CDKN1B;TUT7;PHF20;NCAPG2;CYB561D1;TUBA1C;NIPBL;TUBA1B;TUBA1A;NUF2;TK1;EMB;JAK2;NINL;LIN52;NDC1;RMI2;NUDC;RMI1;DYNLL1;TERF1;DYNLL2;TERF2;SIRT2;RNF168;MZT2B;MZT2A;TUBB2B;TUBB2A;PSMA4;INCENP;POT1;USO1;CENPA;PSMB6;PSMB7;NSD2;RPS27A;CENPT;CENPU;CDKN2B;CENPW;CDKN2C;NDE1;TUBB4B;MZT1;PSMB8;CENPE;CENPF;CENPH;PSMC3;CENPI;PSMC1;TAOK1;CENPK;PSMC2;CENPL;CENPM;FOSB;NCAPD2;CENPN;NCAPD3;CEP41;CENPO;CENPP;CENPQ;MRE11;GMNN;HJURP;UBE2D1;CDC14A;PPP1CB;PPP1CC;TUBB6;TUBB3;RUVBL2;RUVBL1;PIM1;OIP5;NEK2;KMT5A;PHLDA1;PIAS4;CEP135;ANAPC7;CEP131;UBE2E1;DYRK1A;VRK1;VRK2;CDC25C;LEMD3;LEMD2;TUBA4A;CDC25A;RBX1;CDC25B;CLIP1;AJUBA;ANAPC1;KPNB1;ANAPC2;BLM;TUBGCP2;MAX;CUL1;HMMR;PKMYT1;ORC5;ORC4;ORC6;ORC1;ORC3;TPR;ABL1;ANKRD28;NEK8;ODF2;NEK6;NEK7;NDC80;CDK6;CDK4;CDK2;TUBGCP5;MDM2;CDK1;TUBGCP6;TUBGCP3;TPP1;TUBGCP4;NOP10;DIDO1;HSP90AB1;NUMA1;MCM7;MCM8;CEP164;MCM10;FOXM1;SYNE2;SYNE1;PPP6C;SUMO1;EXO1;PPP6R3;SPDL1;TNPO1;LBR;RFC5;RFC3;HSP90AA1;PPP1R12A;RFC4;RFC1;RFC2;ATRX;HAUS6;HAUS5;RANGAP1;SMC1A;HAUS2;TFDP1;DBF4;ESPL1;TFDP2;MCM3;BIRC5;MCM4;MCM5;MCM6;PPP1R12B;MCM2;RAB1A;HDAC1;SRC;VPS4A;NSL1;FZR1;CDC45;RBBP4;POLR2A;HAUS8;POLR2B;POLR2D;RBBP8;E2F1;POLR2E;E2F2;POLR2G;RBBP7;E2F4;POLR2H;E2F6;POLR2K;POLR2L;H2AZ1;H2AZ2;CEP152;CABLES1;MND1;RAD50;RAD51;PPP2R2A;CDC20;HERC2;CDC23;PPP2R1B;PPP2R1A;CHEK2;CHEK1;CDC27;FBXO5;SKP2;CCN1;BTRC;CCNL1;TMPO;SKP1;ESCO1;TINF2;CSNK1D;CSNK1E;KNL1;ESCO2;CSNK2B;AKAP9;TFAM;KIF20A;TP53;BLZF1;DSN1;BRIP1;PCBP4;CEP192;TP53BP1;H4C8;CDT1;RCC2;SMARCA5;ZWINT;POLA1;TPX2;POLA2;STAG2;CDC16;ATM;CC2D1A;CC2D1B;H2AX;TOP2A;FEN1;RSF1;IDE;BRCA1;BRCA2;BABAM2;PCM1;XPO1;MIS18BP1;UIMC1;CNTRL;H3-3A;RAB8A;NDEL1;H3-3B;SEC13;GAA;TUBB;KIF23;TUBG2;TUBG1;H2AJ;RAD51C;KIF2A;KIF2C;MAPRE1;SFI1;SDCCAG8;DYNC1I2;PRIM2;PCNA;PRIM1;SSNA1;MIS12;CAPG;TYMS;PPP2CA;PSMC3IP;PPP2CB;LMNA;RAD54L;PCNT;DYNC1I1;H2BC9;GINS1;RANBP2;MPP2;DYNC1H1;GINS2;NPM1;H2BC8;H2BC5;GINS3;GINS4;RPA1;RPA2;MLH1;NEDD1;MIS18A;RPA3;DLC1;B9D2;SPC24;MAD2L1;SPC25;ERCC6L;NUP188;ZWILCH;DSCC1;PRDM5;BUB1B;PTTG1;CCND1;EP300;KNTC1;BANF1;BORA;LIG1;H2AC6;FBXW11;SGO1;SGO2;MAU2;SHQ1;CCNE2;DKC1;CHMP4B;PSMD10;PSMD11;PSMD14;PSMD13;PDS5B;CCNB2;COP1;CCNB1;CLSPN;UBE2I;NUP155;UBE2C;HSPA2;SEM1;KIF18A;UBE2S;CHMP2B;CHMP2A;UBE2N;YWHAE;GSK3B;CHTF18;LMNB1;CKS1B;YWHAQ;H2BC21;DBT;NUP62;MYBL2;TOPBP1;POLE;YWHAG;YWHAH;SUN2;SUN1;PPP2R5D;MASTL;YWHAZ;CKAP5;RBL2;CCNA2;RBL1;GORASP2;NUP50;GORASP1;H2BC11;NUP54;RBM23;CHMP7;ITGB3BP;DCTN2;DCTN1;DCTN3;LIN9;PSMB10;AURKB;AURKA;POLD3;CLN3;POLD4;POLD1;POLD2;TMEM208;MAPK1;NUP43;BUB3;BUB1;CLASP1;CLASP2;MAPK3;RBM39;STN1;RRM2;WEE1;POLE2;POLE3;NUP35;LPIN2;RAN;NUP37
+5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ERCC6L;NUP107;ZWILCH;UBE2D1;BUB1B;CDC20;PPP1CC;XPO1;CDC23;PPP2R1B;PPP2R1A;CDC27;NUF2;KNTC1;EMB;SPDL1;NDEL1;SEC13;NUDC;ANAPC7;UBE2E1;PPP2R5D;KNL1;RANGAP1;DYNLL1;DYNLL2;CKAP5;SGO1;SGO2;DYNC1LI1;CLIP1;KIF2A;INCENP;TXNIP;BIRC5;TFAM;KIF2C;MAPRE1;ANAPC1;ITGB3BP;ANAPC2;DYNC1I2;SEH1L;ANAPC16;MIS12;CDCA8;CENPA;SKA1;NSL1;AURKB;ANAPC10;SKA2;PPP2CA;PPP2CB;DSN1;NUP85;TMEM208;NUP43;BUB3;BUB1;DYNC1I1;CLASP1;CLASP2;VTI1B;RANBP2;CENPT;DYNC1H1;CENPU;UBE2C;NDE1;RCC2;PLK1;NDC80;ZWINT;CENPE;KIF18A;CENPF;CENPH;UBE2S;CENPI;DLC1;TAOK1;CENPK;CDC16;CENPL;CENPM;CENPN;B9D2;CENPO;CENPP;CENPQ;SPC24;NUP37;SPC25;MAD2L1
+6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ERCC6L;NUP107;ZWILCH;BUB1B;CDC20;PPP1CC;XPO1;PPP2R1B;PPP2R1A;NUF2;KNTC1;EMB;SPDL1;NDEL1;SEC13;NUDC;PPP2R5D;KNL1;RANGAP1;DYNLL1;DYNLL2;CKAP5;SGO1;SGO2;DYNC1LI1;CLIP1;KIF2A;INCENP;BIRC5;KIF2C;MAPRE1;ITGB3BP;DYNC1I2;SEH1L;MIS12;CDCA8;CENPA;SKA1;NSL1;AURKB;SKA2;PPP2CA;PPP2CB;DSN1;NUP85;NUP43;BUB3;BUB1;DYNC1I1;CLASP1;CLASP2;VTI1B;RANBP2;CENPT;DYNC1H1;CENPU;NDE1;RCC2;PLK1;NDC80;ZWINT;CENPE;KIF18A;CENPF;CENPH;CENPI;DLC1;TAOK1;CENPK;CENPL;CENPM;CENPN;B9D2;CENPO;CENPP;CENPQ;SPC24;NUP37;SPC25;MAD2L1
+  Mapped.entities
+1              NA
+2              NA
+3              NA
+4              NA
+5              NA
+6              NA
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          Found.reaction.identifiers
+1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            R-HSA-1236948;R-HSA-1236964;R-HSA-1236954;R-HSA-1236943
+2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                R-HSA-983148;R-HSA-8951499;R-HSA-983146;R-HSA-983145;R-HSA-983144;R-HSA-203979;R-HSA-983142;R-HSA-983427;R-HSA-983426;R-HSA-983138;R-HSA-983425;R-HSA-983424;R-HSA-983422;R-HSA-983421;R-HSA-983161
+3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    R-HSA-375302;R-HSA-156673;R-HSA-156678;R-HSA-2562594;R-HSA-8961678;R-HSA-69127;R-HSA-156682;R-HSA-8961665;R-HSA-174088;R-HSA-187916;R-HSA-8961671;R-HSA-8961688;R-HSA-9647746;R-HSA-174097;R-HSA-69140;R-HSA-2545203;R-HSA-69142;R-HSA-69144;R-HSA-156699;R-HSA-174104;R-HSA-174105;R-HSA-187934;R-HSA-174110;R-HSA-69152;R-HSA-380455;R-HSA-3000335;R-HSA-187937;R-HSA-174119;R-HSA-9018017;R-HSA-174122;R-HSA-174120;R-HSA-3000327;R-HSA-174121;R-HSA-8961699;R-HSA-75820;R-HSA-187948;R-HSA-174124;R-HSA-75823;R-HSA-187949;R-HSA-75822;R-HSA-75825;R-HSA-75824;R-HSA-156723;R-HSA-2470935;R-HSA-69173;R-HSA-187959;R-HSA-174132;R-HSA-174139;R-HSA-170044;R-HSA-3000339;R-HSA-2245218;R-HSA-174144;R-HSA-2545253;R-HSA-170055;R-HSA-69191;R-HSA-4088441;R-HSA-4088439;R-HSA-69195;R-HSA-170057;R-HSA-9624798;R-HSA-174159;R-HSA-69199;R-HSA-174157;R-HSA-170070;R-HSA-174164;R-HSA-174171;R-HSA-380508;R-HSA-170072;R-HSA-8942803;R-HSA-174174;R-HSA-170076;R-HSA-2430533;R-HSA-2430535;R-HSA-170087;R-HSA-170084;R-HSA-170088;R-HSA-69227;R-HSA-141423;R-HSA-187506;R-HSA-174195;R-HSA-9624800;R-HSA-2484822;R-HSA-141429;R-HSA-174202;R-HSA-174203;R-HSA-69754;R-HSA-8942836;R-HSA-9668335;R-HSA-69756;R-HSA-2430552;R-HSA-141437;R-HSA-187520;R-HSA-174209;R-HSA-9754129;R-HSA-170116;R-HSA-9754130;R-HSA-8942607;R-HSA-8962050;R-HSA-170120;R-HSA-170126;R-HSA-9615901;R-HSA-2995389;R-HSA-174227;R-HSA-170131;R-HSA-2995388;R-HSA-174224;R-HSA-174235;R-HSA-8848414;R-HSA-2473151;R-HSA-8854044;R-HSA-187545;R-HSA-174238;R-HSA-2995376;R-HSA-8854041;R-HSA-187552;R-HSA-8854052;R-HSA-8854051;R-HSA-170149;R-HSA-174251;R-HSA-2422927;R-HSA-170153;R-HSA-170158;R-HSA-3000449;R-HSA-174255;R-HSA-5244669;R-HSA-170159;R-HSA-170156;R-HSA-8854071;R-HSA-69299;R-HSA-170161;R-HSA-8848436;R-HSA-187574;R-HSA-4086410;R-HSA-187575;R-HSA-8932400;R-HSA-163010;R-HSA-174273;R-HSA-5229194;R-HSA-5195402;R-HSA-2993898;R-HSA-179410;R-HSA-157906;R-HSA-2529015;R-HSA-9615937;R-HSA-2529020;R-HSA-8961619;R-HSA-179417;R-HSA-9615945;R-HSA-2172666;R-HSA-8961620;R-HSA-179421;R-HSA-2468039;R-HSA-2473152;R-HSA-4088024;R-HSA-8961632;R-HSA-8961636;R-HSA-2468041;R-HSA-2468040;R-HSA-8961651;R-HSA-9648017;R-HSA-2172194;R-HSA-8964492;R-HSA-8852354;R-HSA-8961934;R-HSA-8961920;R-HSA-8964482;R-HSA-2990880;R-HSA-2294574;R-HSA-8852362;R-HSA-2990882;R-HSA-2984226;R-HSA-8961946;R-HSA-2520883;R-HSA-2294580;R-HSA-8964498;R-HSA-8853405;R-HSA-188191;R-HSA-2294590;R-HSA-8961961;R-HSA-8964525;R-HSA-2172678;R-HSA-8961952;R-HSA-8964513;R-HSA-9686969;R-HSA-8853419;R-HSA-176942;R-HSA-2168079;R-HSA-4419948;R-HSA-68913;R-HSA-2984220;R-HSA-2466068;R-HSA-2429719;R-HSA-8853429;R-HSA-68914;R-HSA-68917;R-HSA-68916;R-HSA-68919;R-HSA-2301205;R-HSA-8961982;R-HSA-2172183;R-HSA-68918;R-HSA-9634219;R-HSA-8964531;R-HSA-8961972;R-HSA-176956;R-HSA-9659820;R-HSA-182594;R-HSA-1362261;R-HSA-8853444;R-HSA-5221130;R-HSA-1362270;R-HSA-9648089;R-HSA-68940;R-HSA-8964550;R-HSA-8961991;R-HSA-68944;R-HSA-68947;R-HSA-68946;R-HSA-68948;R-HSA-9686980;R-HSA-68950;R-HSA-9618378;R-HSA-1363276;R-HSA-8964561;R-HSA-68954;R-HSA-4088162;R-HSA-2980720;R-HSA-113503;R-HSA-1363274;R-HSA-8964567;R-HSA-9648114;R-HSA-68960;R-HSA-113504;R-HSA-162657;R-HSA-8964588;R-HSA-2314566;R-HSA-1363314;R-HSA-4088152;R-HSA-8978926;R-HSA-2314569;R-HSA-2294600;R-HSA-8964580;R-HSA-2984258;R-HSA-1363303;R-HSA-380278;R-HSA-4088141;R-HSA-380272;R-HSA-4088134;R-HSA-1363311;R-HSA-1226094;R-HSA-4088130;R-HSA-1226095;R-HSA-1363306;R-HSA-380283;R-HSA-8962039;R-HSA-8853496;R-HSA-2514854;R-HSA-380294;R-HSA-3002798;R-HSA-1227670;R-HSA-1227671;R-HSA-1638803;R-HSA-380303;R-HSA-69005;R-HSA-69006;R-HSA-380311;R-HSA-1363328;R-HSA-69015;R-HSA-3002811;R-HSA-1363331;R-HSA-380316;R-HSA-69016;R-HSA-2468287;R-HSA-69019;R-HSA-2467775;R-HSA-9624845;R-HSA-9668405;R-HSA-9668415;R-HSA-9624893;R-HSA-9668389;R-HSA-187828;R-HSA-9668395;R-HSA-8961840;R-HSA-188345;R-HSA-69562;R-HSA-1638821;R-HSA-188350;R-HSA-69053;R-HSA-9668398;R-HSA-8961846;R-HSA-9624876;R-HSA-8852280;R-HSA-2288097;R-HSA-2467809;R-HSA-2467811;R-HSA-69063;R-HSA-5223304;R-HSA-4088309;R-HSA-4088306;R-HSA-4088307;R-HSA-8852298;R-HSA-69068;R-HSA-4088305;R-HSA-8941895;R-HSA-8961863;R-HSA-9668419;R-HSA-188371;R-HSA-3000319;R-HSA-8941915;R-HSA-69074;R-HSA-4088298;R-HSA-4088299;R-HSA-8852306;R-HSA-198613;R-HSA-2574845;R-HSA-8961874;R-HSA-8852317;R-HSA-3000310;R-HSA-2574840;R-HSA-2468293;R-HSA-188386;R-HSA-8852324;R-HSA-9667952;R-HSA-174054;R-HSA-188390;R-HSA-113638;R-HSA-174058;R-HSA-8961888;R-HSA-9634169;R-HSA-113643;R-HSA-174057;R-HSA-8852331;R-HSA-2214351;R-HSA-9667965;R-HSA-8961895;R-HSA-8856951;R-HSA-8964475;R-HSA-8961915;R-HSA-2467798;R-HSA-174070;R-HSA-8856945;R-HSA-8852337;R-HSA-2467794;R-HSA-169461;R-HSA-8852351;R-HSA-8964465;R-HSA-2562526;R-HSA-8961907;R-HSA-174079;R-HSA-69116;R-HSA-169468;R-HSA-8964471
+4 R-HSA-156673;R-HSA-156678;R-HSA-156682;R-HSA-912389;R-HSA-174088;R-HSA-174097;R-HSA-912408;R-HSA-156699;R-HSA-174104;R-HSA-174105;R-HSA-174110;R-HSA-912429;R-HSA-75809;R-HSA-3000335;R-HSA-174119;R-HSA-174122;R-HSA-174120;R-HSA-3000327;R-HSA-174121;R-HSA-176175;R-HSA-75820;R-HSA-174124;R-HSA-75823;R-HSA-75822;R-HSA-75825;R-HSA-75824;R-HSA-156723;R-HSA-2470935;R-HSA-69685;R-HSA-174132;R-HSA-174139;R-HSA-170044;R-HSA-3000339;R-HSA-174144;R-HSA-170055;R-HSA-606287;R-HSA-912458;R-HSA-170057;R-HSA-9624798;R-HSA-9668831;R-HSA-174159;R-HSA-174157;R-HSA-912450;R-HSA-170070;R-HSA-174164;R-HSA-606289;R-HSA-174171;R-HSA-170072;R-HSA-912470;R-HSA-8942803;R-HSA-174174;R-HSA-912467;R-HSA-170076;R-HSA-141409;R-HSA-170087;R-HSA-170084;R-HSA-170088;R-HSA-141422;R-HSA-141423;R-HSA-187506;R-HSA-174195;R-HSA-9624800;R-HSA-912505;R-HSA-141431;R-HSA-141429;R-HSA-176250;R-HSA-174202;R-HSA-174203;R-HSA-912503;R-HSA-69754;R-HSA-8942836;R-HSA-141439;R-HSA-912496;R-HSA-69756;R-HSA-606326;R-HSA-141437;R-HSA-187520;R-HSA-174209;R-HSA-606349;R-HSA-170116;R-HSA-8942607;R-HSA-176264;R-HSA-8962050;R-HSA-170120;R-HSA-170126;R-HSA-2995389;R-HSA-174227;R-HSA-170131;R-HSA-2995388;R-HSA-174224;R-HSA-6804724;R-HSA-174235;R-HSA-8848414;R-HSA-2473151;R-HSA-187545;R-HSA-174238;R-HSA-2995376;R-HSA-187552;R-HSA-170149;R-HSA-176298;R-HSA-174251;R-HSA-2422927;R-HSA-170153;R-HSA-170158;R-HSA-3000449;R-HSA-174255;R-HSA-170159;R-HSA-170156;R-HSA-170161;R-HSA-8848436;R-HSA-187574;R-HSA-187575;R-HSA-8932400;R-HSA-176318;R-HSA-163010;R-HSA-174273;R-HSA-181450;R-HSA-179410;R-HSA-157906;R-HSA-179417;R-HSA-179421;R-HSA-2468039;R-HSA-2473152;R-HSA-4088024;R-HSA-264418;R-HSA-2468041;R-HSA-2468040;R-HSA-264435;R-HSA-349426;R-HSA-264444;R-HSA-5693609;R-HSA-349444;R-HSA-69891;R-HSA-2172194;R-HSA-75010;R-HSA-8964492;R-HSA-75016;R-HSA-8964482;R-HSA-349455;R-HSA-264458;R-HSA-2984226;R-HSA-163090;R-HSA-75028;R-HSA-163099;R-HSA-8964498;R-HSA-163096;R-HSA-8964525;R-HSA-8964513;R-HSA-2168079;R-HSA-4419948;R-HSA-68913;R-HSA-2984220;R-HSA-2466068;R-HSA-163120;R-HSA-68914;R-HSA-68917;R-HSA-68916;R-HSA-68919;R-HSA-2301205;R-HSA-2172183;R-HSA-68918;R-HSA-9634219;R-HSA-8964531;R-HSA-6803801;R-HSA-9659820;R-HSA-182594;R-HSA-1362261;R-HSA-9670101;R-HSA-1362270;R-HSA-9023941;R-HSA-68940;R-HSA-8964550;R-HSA-9023943;R-HSA-68944;R-HSA-68947;R-HSA-68946;R-HSA-68948;R-HSA-68950;R-HSA-1363276;R-HSA-8964561;R-HSA-174427;R-HSA-68954;R-HSA-174425;R-HSA-4088162;R-HSA-1363274;R-HSA-8964567;R-HSA-6803719;R-HSA-68960;R-HSA-6804741;R-HSA-8964588;R-HSA-174438;R-HSA-2314566;R-HSA-174439;R-HSA-1363314;R-HSA-4088152;R-HSA-8978926;R-HSA-9686521;R-HSA-2314569;R-HSA-174441;R-HSA-8964580;R-HSA-174446;R-HSA-174447;R-HSA-174444;R-HSA-174445;R-HSA-2984258;R-HSA-9686524;R-HSA-174451;R-HSA-9670114;R-HSA-174448;R-HSA-1363303;R-HSA-380278;R-HSA-4088141;R-HSA-380272;R-HSA-174452;R-HSA-4088134;R-HSA-9671145;R-HSA-174456;R-HSA-1363311;R-HSA-1226094;R-HSA-4088130;R-HSA-1226095;R-HSA-1363306;R-HSA-380283;R-HSA-380294;R-HSA-3002798;R-HSA-1638803;R-HSA-380303;R-HSA-69005;R-HSA-69006;R-HSA-380311;R-HSA-1363328;R-HSA-69015;R-HSA-3002811;R-HSA-1363331;R-HSA-380316;R-HSA-69016;R-HSA-2468287;R-HSA-69019;R-HSA-9624845;R-HSA-9624893;R-HSA-6793685;R-HSA-9668902;R-HSA-187828;R-HSA-9668904;R-HSA-1638821;R-HSA-69053;R-HSA-6804955;R-HSA-9624876;R-HSA-2288097;R-HSA-69063;R-HSA-4088309;R-HSA-4088306;R-HSA-4088307;R-HSA-69068;R-HSA-4088305;R-HSA-8941895;R-HSA-8941915;R-HSA-69074;R-HSA-4088298;R-HSA-4088299;R-HSA-2574845;R-HSA-2574840;R-HSA-2468293;R-HSA-5633460;R-HSA-9667952;R-HSA-6804879;R-HSA-9634169;R-HSA-9029987;R-HSA-2214351;R-HSA-9667965;R-HSA-8856951;R-HSA-8964475;R-HSA-8856945;R-HSA-169461;R-HSA-8964465;R-HSA-2562526;R-HSA-69116;R-HSA-169468;R-HSA-8964471;R-HSA-375302;R-HSA-2562594;R-HSA-8961678;R-HSA-69127;R-HSA-5683792;R-HSA-8961665;R-HSA-187916;R-HSA-8961671;R-HSA-8961688;R-HSA-9647746;R-HSA-69140;R-HSA-2545203;R-HSA-69142;R-HSA-69144;R-HSA-187934;R-HSA-69152;R-HSA-380455;R-HSA-187937;R-HSA-9018017;R-HSA-8961699;R-HSA-187948;R-HSA-187949;R-HSA-69173;R-HSA-187959;R-HSA-176702;R-HSA-176700;R-HSA-2245218;R-HSA-5683735;R-HSA-2545253;R-HSA-69191;R-HSA-4088441;R-HSA-4088439;R-HSA-69195;R-HSA-69199;R-HSA-380508;R-HSA-2430533;R-HSA-2430535;R-HSA-5683774;R-HSA-69227;R-HSA-2484822;R-HSA-9668335;R-HSA-2430552;R-HSA-9754129;R-HSA-9754130;R-HSA-9615901;R-HSA-9670149;R-HSA-8854044;R-HSA-8854041;R-HSA-8854052;R-HSA-8854051;R-HSA-5244669;R-HSA-8854071;R-HSA-69299;R-HSA-4086410;R-HSA-5229194;R-HSA-5195402;R-HSA-2993898;R-HSA-2529015;R-HSA-9615937;R-HSA-2529020;R-HSA-8961619;R-HSA-9615945;R-HSA-2172666;R-HSA-8961620;R-HSA-8961632;R-HSA-8961636;R-HSA-8961651;R-HSA-1214188;R-HSA-9648017;R-HSA-8852354;R-HSA-8961934;R-HSA-8961920;R-HSA-164616;R-HSA-164617;R-HSA-2990880;R-HSA-2294574;R-HSA-8852362;R-HSA-164620;R-HSA-2990882;R-HSA-8961946;R-HSA-2520883;R-HSA-2294580;R-HSA-8853405;R-HSA-188191;R-HSA-2294590;R-HSA-8961961;R-HSA-2172678;R-HSA-8961952;R-HSA-9686969;R-HSA-8853419;R-HSA-176942;R-HSA-2429719;R-HSA-8853429;R-HSA-8961982;R-HSA-8961972;R-HSA-176956;R-HSA-8853444;R-HSA-5221130;R-HSA-9648089;R-HSA-8961991;R-HSA-9686980;R-HSA-9618378;R-HSA-2980720;R-HSA-113503;R-HSA-9648114;R-HSA-113504;R-HSA-162657;R-HSA-9668597;R-HSA-2294600;R-HSA-8962039;R-HSA-8853496;R-HSA-2514854;R-HSA-6799332;R-HSA-1227670;R-HSA-1227671;R-HSA-2467775;R-HSA-9668405;R-HSA-9668415;R-HSA-6803403;R-HSA-6803411;R-HSA-9668389;R-HSA-9668395;R-HSA-8961840;R-HSA-188345;R-HSA-69562;R-HSA-188350;R-HSA-9668398;R-HSA-8961846;R-HSA-9007926;R-HSA-8852280;R-HSA-2467809;R-HSA-2467811;R-HSA-5223304;R-HSA-8852298;R-HSA-8961863;R-HSA-9668419;R-HSA-188371;R-HSA-3000319;R-HSA-8852306;R-HSA-198613;R-HSA-8961874;R-HSA-8852317;R-HSA-3000310;R-HSA-6803388;R-HSA-69598;R-HSA-188386;R-HSA-69600;R-HSA-8852324;R-HSA-174054;R-HSA-188390;R-HSA-69604;R-HSA-176101;R-HSA-113638;R-HSA-174058;R-HSA-8961888;R-HSA-69608;R-HSA-6799246;R-HSA-113643;R-HSA-174057;R-HSA-8852331;R-HSA-8961895;R-HSA-8961915;R-HSA-2467798;R-HSA-174070;R-HSA-176116;R-HSA-8852337;R-HSA-2467794;R-HSA-8852351;R-HSA-8961907;R-HSA-174079
+5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         R-HSA-141409;R-HSA-141431;R-HSA-141429;R-HSA-141422;R-HSA-141439;R-HSA-141423;R-HSA-141437
+6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                R-HSA-141409;R-HSA-141431;R-HSA-141422;R-HSA-141439</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>R version 4.2.1 (2022-06-23)
+Platform: x86_64-apple-darwin17.0 (64-bit)
+Running under: macOS Big Sur ... 10.16
+
+Matrix products: default
+BLAS:   /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRblas.0.dylib
+LAPACK: /Library/Frameworks/R.framework/Versions/4.2/Resources/lib/libRlapack.dylib
+
+locale:
+[1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+
+attached base packages:
+[1] stats4    stats     graphics  grDevices utils     datasets  methods  
+[8] base     
+
+other attached packages:
+ [1] gageData_2.34.0             gage_2.46.1                
+ [3] pathview_1.36.1             org.Hs.eg.db_3.15.0        
+ [5] AnnotationDbi_1.58.0        DESeq2_1.36.0              
+ [7] SummarizedExperiment_1.26.1 Biobase_2.56.0             
+ [9] MatrixGenerics_1.8.1        matrixStats_0.62.0         
+[11] GenomicRanges_1.48.0        GenomeInfoDb_1.32.4        
+[13] IRanges_2.30.1              S4Vectors_0.34.0           
+[15] BiocGenerics_0.42.0        
+
+loaded via a namespace (and not attached):
+ [1] httr_1.4.4             bit64_4.0.5            jsonlite_1.8.3        
+ [4] splines_4.2.1          assertthat_0.2.1       blob_1.2.3            
+ [7] GenomeInfoDbData_1.2.8 yaml_2.3.6             pillar_1.8.1          
+[10] RSQLite_2.2.18         lattice_0.20-45        glue_1.6.2            
+[13] digest_0.6.30          RColorBrewer_1.1-3     XVector_0.36.0        
+[16] colorspace_2.0-3       htmltools_0.5.3        Matrix_1.4-1          
+[19] XML_3.99-0.12          pkgconfig_2.0.3        genefilter_1.78.0     
+[22] zlibbioc_1.42.0        GO.db_3.15.0           xtable_1.8-4          
+[25] scales_1.2.1           BiocParallel_1.30.4    tibble_3.1.8          
+[28] annotate_1.74.0        KEGGREST_1.36.3        generics_0.1.3        
+[31] ggplot2_3.3.6          cachem_1.0.6           cli_3.4.1             
+[34] survival_3.3-1         magrittr_2.0.3         crayon_1.5.2          
+[37] KEGGgraph_1.56.0       memoise_2.0.1          evaluate_0.17         
+[40] fansi_1.0.3            graph_1.74.0           tools_4.2.1           
+[43] lifecycle_1.0.3        stringr_1.4.1          locfit_1.5-9.6        
+[46] munsell_0.5.0          DelayedArray_0.22.0    Biostrings_2.64.1     
+[49] compiler_4.2.1         rlang_1.0.6            grid_4.2.1            
+[52] RCurl_1.98-1.9         rstudioapi_0.14        htmlwidgets_1.5.4     
+[55] bitops_1.0-7           rmarkdown_2.17         gtable_0.3.1          
+[58] codetools_0.2-18       DBI_1.1.3              R6_2.5.1              
+[61] knitr_1.40             dplyr_1.0.10           fastmap_1.1.0         
+[64] bit_4.0.4              utf8_1.2.2             Rgraphviz_2.40.0      
+[67] stringi_1.7.8          parallel_4.2.1         Rcpp_1.0.9            
+[70] vctrs_0.5.0            geneplotter_1.74.0     png_0.1-7             
+[73] tidyselect_1.2.0       xfun_0.34             </code></pre>
+</div>
+</div>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>

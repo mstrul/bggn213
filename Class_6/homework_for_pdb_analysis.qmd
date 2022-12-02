@@ -1,0 +1,60 @@
+---
+title: "homework_for_pdb_analysis"
+date: 10/14/2022
+format: pdf
+author: Max Strul
+editor: visual
+theme: nature
+toc: true
+---
+Ensure that you have performed `install.packages("bio3d")`
+
+## Example Code:
+```{r}
+library(bio3d)
+#Step one
+s1 <- read.pdb("4AKE") # kinase with drug
+s2 <- read.pdb("1AKE") # kinase no drug
+s3 <- read.pdb("1E4Y") # kinase with drug
+#Step two
+s1.chainA <- trim.pdb(s1, chain="A", elety="CA")
+s2.chainA <- trim.pdb(s2, chain="A", elety="CA")
+s3.chainA <- trim.pdb(s1, chain="A", elety="CA")
+#Step 3
+s1.b <- s1.chainA$atom$b
+s2.b <- s2.chainA$atom$b
+s3.b <- s3.chainA$atom$b
+#Step 4
+plotb3(s1.b, sse=s1.chainA, typ="l", ylab="Bfactor")
+plotb3(s2.b, sse=s2.chainA, typ="l", ylab="Bfactor")
+plotb3(s3.b, sse=s3.chainA, typ="l", ylab="Bfactor")
+
+```
+## Question 6 How would you generalize the original code above to work with any set of input protein structures?
+
+```{r}
+
+pdbfunction <- function(pdbname){
+  pdbinfo <- read.pdb(pdbname)
+  pdbinfo.chainA <- trim.pdb(pdbinfo, chain="A", elety="CA")
+  pdbinfo.b <- pdbinfo.chainA$atom$b
+  plotb3(pdbinfo.b,sse=pdbinfo.chainA,typ="l",ylab="Bfactor")
+}
+
+
+```
+
+Now we want to call the function
+
+```{r}
+
+pdbfunction("1xtg")
+#Botulism Neurotox
+
+pdbfunction("4AKE")#without
+pdbfunction("1AKE")#with
+pdbfunction("1E4Y")
+
+
+```
+

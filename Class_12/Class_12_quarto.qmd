@@ -1,0 +1,218 @@
+---
+title: "Class_12"
+author: "Max Strul"
+format: pdf
+editor: visual
+toc: TRUE
+date: 11-4-2022
+#mainfont: helvetica neue
+---
+
+# Answer Q1-> 10
+
+## Class 12
+
+Setting up the packages, without having any errors or output present
+
+```{r}
+#Testing New codeline
+library("BiocManager")
+library("DESeq2")
+```
+
+#Setting up the data First you must align reads to a reference genome or transcriptome.
+
+First we use the abundance of each transcript was don through using `kallisto` Then it was summarized to the gene level to produce length-scaled counts using R `txImport`.
+
+-   1.) Conesa, A. et al. "A survey of best practices for RNA-seq data analysis." Genome Biology 17:13 (2016).
+-   2.) Soneson, C., Love, M. I. & Robinson, M. D. "Differential analyses for RNA-seq: transcript-level estimates improve gene-level inferences." F1000Res. 4:1521 (2016).
+-   3.) Griffith, Malachi, et al. "Informatics for RNA sequencing: a web resource for analysis on the cloud." PLoS Comput Biol 11.8: e1004393 (2015).
+
+```{r}
+counts <- read.csv("airway_scaledcounts.csv", row.names = 1)
+metadata <- read.csv("airway_metadata.csv")
+```
+
+## Question 1 & Question 2
+
+How many genes are in this data set and ho many control cell lines do we have?
+
+```{r}
+length(metadata$id)
+length(metadata$id[as.logical(metadata$dex=="control")])
+```
+
+8 total genes and 4 control lines
+#Q3
+
+
+
+#Q4
+
+```{r}
+control <- metadata[metadata$dex=="control",]
+control.counts <- counts[,control$id]
+control.mean <- rowSums(control.counts)/4
+
+treatment <- metadata[metadata$dex=="treated",]
+treatment.counts <- counts[,treatment$id]
+treatment.mean <- rowSums(treatment.counts)/4
+```
+
+The columns of counts correspond to the rows of the meta data.
+
+#Q5
+
+```{r}
+meancounts <- data.frame(control.mean, treatment.mean)
+
+plot(meancounts)
+```
+
+```{r}
+library("ggplot2")
+#ggplot(meancounts)+aes()+geom_point()
+```
+
+log2 fold change
+#Q6
+
+```{r}
+meancounts$log2fc <- log2(meancounts$treatment.mean/meancounts$control.mean)
+
+plot(meancounts$log2fc)
+```
+
+Getting rid of zero values/ counts
+
+#Q7
+
+arr.ind means these will become the indices that we will extract from or use for future indices. 
+
+```{r}
+#non.zero.vals <- meancounts[,1:2]!=0
+#mycounts <- meancounts[as.logical(rowSums(zero.vals!=0)),]
+
+to.keep.inds <- rowSums(meancounts[,1:2]==0) == 0
+mycounts <- meancounts[to.keep.inds,]
+head(mycounts)
+```
+
+
+
+Solving which genes are above a 2 fold change
+
+```{r}
+
+sum(mycounts$log2fc >=2)
+
+sum(mycounts$log2fc <= -2)
+
+```
+#Q8
+There are 314 genes that are unregulated by a fold change of 4 
+#Q9
+There are 485 which are down regulated by a 4 fold change.
+
+#Q10
+No because we do not know the statistical significance of this though!
+
+```{r}
+dds <- DESeqDataSetFromMatrix(countData=counts,
+                              colData=metadata,
+                              design=~dex)
+dds
+dds <- DESeq(dds)
+res <- results(dds)
+res <- as.data.frame(res)
+summary(res)
+```
+
+Finding the pvalue change difference between the two groups which is below 0.05
+
+```{r}
+#res_counts <- res$baseMean[res$pvalue<= 0.05,]
+
+```
+
+Note: with each time you ask a question you are increasing the statistical chance that you've randomly selected something that happened by chance.
+
+So we will be using adjusted p value
+
+```{r}
+volcano_plot1 <- plot(res$log2FoldChange, -log(res$padj),ylab="-log(P-value)",xlab="Log2(FoldChange)")
+abline(v=c(-2,2), col="darkgray", lty=2)
+abline(h=-log(0.01), col="darkgray", lty=2)
+```
+
+
+```{r}
+library("AnnotationDbi")
+library("org.Hs.eg.db")
+#for mice use library("org.Mm.eg.db")
+columns(org.Hs.eg.db)
+```
+
+
+Now we want to map IDs so we will use the `mapIds()` function to add individual columns to our results table. This function maps genes and properly adds annotations. We will do so with ENSMBL which adds annotations based on the ensmbl
+
+```{r}
+#to create a new column with a new column name use res$symbol <- 
+res$symbol <- mapIds(org.Hs.eg.db,
+                     keys=row.names(res),
+                     keytype="ENSEMBL",
+                     column="SYMBOL",
+                     multiVals = "first")
+head(res)
+write.csv(res,"geneswithnames.csv")
+```
+```{r}
+res$entrezID <- mapIds(org.Hs.eg.db,
+                 keys=row.names(res),
+                 keytype="ENSEMBL",
+                 column="ENTREZID")
+head(res)
+res$uniprot <- mapIds(org.Hs.eg.db,
+                      keys=row.names(res),
+                      keytype="ENSEMBL",
+                      column="UNIPROT")
+head(res)
+res$PMID <- mapIds(org.Hs.eg.db,
+                      keys=res$genename,
+                      keytype="ENTREZID",
+                      column="PMID")
+head(res)
+```
+
+# Pathway analysis
+
+The two main databases or gene-sets that can be used are: KEGG and
+
+```{r}
+library("pathview")
+library("gage")
+library("gageData")
+data(kegg.sets.hs)
+```
+
+the `gage()` function requires a named vector of fold changes, where the names of the values are the Entrez gene IDs
+
+```{r}
+foldchanges=res$log2FoldChange
+names(foldchanges)=res$entrezID
+```
+
+Running the gage analysis
+
+```{r}
+keggres = gage(foldchanges, gsets=kegg.sets.hs)
+#you can also do kegg.sets.mm
+
+```
+
+
+
+
+
+
+

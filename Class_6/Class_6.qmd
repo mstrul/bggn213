@@ -1,0 +1,166 @@
+---
+title: "Class 6"
+date: 10/14/2022
+format: pdf
+author: Max Strul
+editor: visual
+theme: nature
+toc: true
+---
+
+# 
+
+```{r}
+#fname <- function(arg1, arg2) {paste(arg1,arg2)}
+# Example input vectors to start with
+#student1 <- c(100, 100, 100, 100, 100, 100, 100, 90)
+#student2 <- c(100, NA, 90, 90, 90, 90, 97, 80)
+#student3 <- c(90, NA, NA, NA, NA, NA, NA, NA)
+# gradebook_1 <- data.frame(student_1=student1,student_2=student2,student_3=student3)
+url <- "https://tinyurl.com/gradeinput"
+example_gradebook_1 <- read.csv(url,row.names = 1)
+```
+
+# Writing the grade function
+
+```{r}
+#grade() function --> Needs to
+#first sort all numbers
+#pop or get rid of lowest value (based on how it sorts)
+grade <- function(gradebook,studentnumber){
+  gradebook[is.na(gradebook)]<-0
+  student <- gradebook[studentnumber,]
+  single_grade <- student[,-which.min(student)] 
+  #this is a vector of a student's grade book minus their lowest grade
+  gradebook_size <- length(single_grade)
+  reported_grade <- sum(single_grade)/gradebook_size
+}
+```
+
+# Creating a gradebook
+
+```{r}
+class_size <- nrow(example_gradebook_1)
+final_grades <- data.frame(student=1:class_size,final_grade=1)
+for(i in 1:class_size){
+  final_grades[i,2]<-(grade(example_gradebook_1,i))
+}
+print(final_grades)
+```
+
+# Apply function
+
+`apply()` function is a useful function that can be used to create a gradebook via the restraints of a given matrix.
+
+```{r}
+#print(apply(example_gradebook_1,1,grade)) 
+
+#This does not work for the given function grade
+
+#because it was made to apply to an entire spreadsheet of data.
+
+```
+
+# Which student scored the highest?
+
+```{r}
+y = final_grades[,2]
+names(y) = rownames(example_gradebook_1)
+sort(y)
+#Here we see student #18 scored the highest. 
+#This function has an issue
+#if multiple students score the same value then the sort function is better
+```
+
+# Which homework was toughest on students?
+
+```{r}
+#Essentially we want to find the specific homework 
+#that was the lowest scoring assignment for the most students
+#We want to take the minimum position of each student's grade book
+#then take the mode of that value (most frequently occurring one)
+#I dont want to consider NA as a hard homework, thus I will not include such values.
+full_gradebook <- read.csv(url,row.names = 1)
+list_of_hardest_homeworks <- data.frame(student=1:class_size,hardest_hw=1)
+toughest_homework <- function(gradebook){
+  for(i in 1:nrow(gradebook)){
+    list_of_hardest_homeworks[i,2] <- which.min(gradebook[i,])
+  }
+  list_of_homeworks <- sort(list_of_hardest_homeworks[,-1])
+}
+
+toughest_homework_array <- toughest_homework(full_gradebook)
+print(toughest_homework_array)
+
+
+```
+
+Here we see the mode of this data vector is 2
+
+Alternatively:
+
+```{r}
+sort(apply(example_gradebook_1,2,sum, na.rm=TRUE))
+```
+
+# Which homework was most predictive of overall score?
+
+```{r}
+#Which homework was most predictive of overall score?
+#essentially means which homework for each student is closest to their final grade
+#then taking the mode of that 
+
+#look at the gradebook for each student
+#use modulo to find the value with the lowest difference in grade
+
+prediction <- example_gradebook_1
+predictive_hw <- function(gradebook){
+                      for(i in 1:nrow(gradebook)){
+                          for(x in 1:ncol(gradebook)){
+                            prediction[i,x]<-final_grades[i,2]%%gradebook[i,x]
+                          }
+                      }
+  print(prediction)
+}
+
+predicted_array <- predictive_hw(example_gradebook_1)
+
+#The array above tells us that if there is a student
+#whos homework grade is the same as any of their final grade
+#the modulo would be 0. 
+#We can compare this with their actual grade
+print(example_gradebook_1)
+
+#And their final grade
+print(final_grades)
+
+#For a better output we may want this as a list 
+#of which homework was most correlated with each student's final grade
+
+
+#To do this we want to find the position of the lowest value 
+#within the row of the predicted_array
+#apply(predicted_array,1,which.min())
+
+vector_of_lowest_modulo <- data.frame(values=1:nrow(final_grades))
+
+for(i in 1:nrow(final_grades)){
+  vector_of_lowest_modulo[i,1] <- which.min(predicted_array[i,])
+}
+vector_of_lowest_modulo
+sort(vector_of_lowest_modulo$values)
+
+#This tells us that homework 1 on average has the highest correlation
+#which comparing to the correlation function is incorrect.
+
+```
+
+Alternatively... use `apply()`
+
+```{r}
+No_nas <- example_gradebook_1
+No_nas[is.na(No_nas)] <- 0
+sort(apply(No_nas,2,cor,final_grades[,2]),decreasing=TRUE)
+```
+
+Here we see homework 2 is the least correlative with grades, and homework 5 is the most correlated with grades.
